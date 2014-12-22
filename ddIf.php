@@ -9,7 +9,7 @@
  * 
  * @param operand1 {string} - The first operand for comparing. @required
  * @param operand2 {string} - The second operand for comparing. Default: ''.
- * @param operator {r; !r; b; m; mr; br; bool; inarray} - Comparing operator. Valid values: =(r), !=(!r), >(b), <(m), <=(mr), >=(br), bool, inarray. Default: 'r'.
+ * @param operator {==; !=; >; <; <=; >=; bool; inarray} - Comparing operator. Valid values: =, !=, >, <, <=, >=, bool, inarray. Default: '=='.
  * @param trueString {string} - This string is returning if result is true. Default: ''.
  * @param falseString {string} - This string is returning if result is false. Default: ''.
  * @param trueChunk {string: chunkName} - This value is returning if result is true (chunk). Default: ''.
@@ -31,18 +31,24 @@ if (isset($operand1)){
 	$boolOut = '';
 	//Выбираем сравнение в зависимости от оператора
 	switch ($operator){
+		case '!=':
+		//Backward compatibility
 		case '!r':
 			$boolOut = ($operand1 != $operand2) ? true : false;
 		break;
+		case '>':
 		case 'b':
 			$boolOut = ($operand1 > $operand2) ? true : false;
 		break;
+		case '<':
 		case 'm':
 			$boolOut = ($operand1 < $operand2) ? true : false;
 		break;
+		case '>=':
 		case 'br':
 			$boolOut = ($operand1 >= $operand2) ? true : false;
 		break;
+		case '<=':
 		case 'mr':
 			$boolOut = ($operand1 <= $operand2) ? true : false;
 		break;
@@ -53,6 +59,7 @@ if (isset($operand1)){
 			$operand2 = explode(',',$operand2);
 			$boolOut = in_array($operand1, $operand2) ? true : false;
 		break;
+		case '==':
 		case 'r':
 		default:
 			$boolOut = ($operand1 == $operand2) ? true : false;
