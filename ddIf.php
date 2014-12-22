@@ -22,6 +22,8 @@
  * http://www.DivanDesign.biz
  */
 
+$result = '';
+
 //Если передано, что сравнивать
 if (isset($operand1)){
 	//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
@@ -65,33 +67,35 @@ if (isset($operand1)){
 			$boolOut = ($operand1 == $operand2) ? true : false;
 	}
 	
-	$result = array();
-	
 	//Если есть дополнительные данные
 	if (isset($placeholders)){
 		//Подключаем modx.ddTools
 		require_once $modx->config['base_path'].'assets/snippets/ddTools/modx.ddtools.class.php';
 		
 		//Разбиваем их
-		$result = ddTools::explodeAssoc($placeholders);
+		$placeholders = ddTools::explodeAssoc($placeholders);
+	}else{
+		$placeholders = array();
 	}
 	
 	//Если значение истино
 	if($boolOut){
 		//Возвращаем чанк или строку
 		if(isset($trueChunk)){
-			return $modx->parseChunk($trueChunk, $result, '[+','+]');
+			$result = $modx->parseChunk($trueChunk, $placeholders, '[+','+]');
 		}else{
-			return isset($trueString) ? $trueString : '';
+			$result = isset($trueString) ? $trueString : '';
 		}
 	//Если значение ложно
 	}else{
 		//Возвращаем чанк или строку
 		if(isset($falseChunk)){
-			return $modx->parseChunk($falseChunk, $result, '[+','+]');
+			$result = $modx->parseChunk($falseChunk, $placeholders, '[+','+]');
 		}else{
-			return isset($falseString) ? $falseString : '';
+			$result = isset($falseString) ? $falseString : '';
 		}
 	}
 }
+
+return $result;
 ?>
