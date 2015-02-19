@@ -78,22 +78,15 @@ if (isset($operand1)){
 		$placeholders = array();
 	}
 	
+	$trueString = isset($trueString) ? $trueString : (isset($trueChunk) ? $modx->getChunk($trueChunk) : '');
+	$falseString = isset($falseString) ? $falseString : (isset($falseChunk) ? $modx->getChunk($falseChunk) : '');
+	
 	//Если значение истино
 	if($boolOut){
-		//Возвращаем чанк или строку
-		if(isset($trueChunk)){
-			$result = $modx->parseChunk($trueChunk, $placeholders, '[+','+]');
-		}else{
-			$result = isset($trueString) ? $trueString : '';
-		}
+		$result = $modx->parseText($trueString, $placeholders);
 	//Если значение ложно
 	}else{
-		//Возвращаем чанк или строку
-		if(isset($falseChunk)){
-			$result = $modx->parseChunk($falseChunk, $placeholders, '[+','+]');
-		}else{
-			$result = isset($falseString) ? $falseString : '';
-		}
+		$result = $modx->parseText($falseString, $placeholders);
 	}
 }
 
