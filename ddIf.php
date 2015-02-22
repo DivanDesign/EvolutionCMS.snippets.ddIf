@@ -28,6 +28,7 @@ $result = '';
 if (isset($operand1)){
 	//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
 	$operand2 = isset($operand2) ? $operand2 : '';
+	$operator = isset($operator) ? $operator : '==';
 	
 	//Булевое значение истинности сравнения
 	$boolOut = '';
