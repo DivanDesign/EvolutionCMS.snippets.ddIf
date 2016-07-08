@@ -10,7 +10,7 @@
  * 
  * @param $operand1 {string} - The first operand for comparing. @required
  * @param $operand2 {string} - The second operand for comparing. Default: ''.
- * @param $operator {==; !=; >; <; <=; >=; bool; inarray} - Comparing operator. Valid values: =, !=, >, <, <=, >=, bool, inarray. Default: '=='.
+ * @param $operator {==; !=; >; <; <=; >=; bool; inarray; isnumeric} - Comparing operator. Valid values: =, !=, >, <, <=, >=, bool, inarray, isnumeric. Default: '=='.
  * @param $trueString {string} - This string is returning if result is true. Default: ''.
  * @param $falseString {string} - This string is returning if result is false. Default: ''.
  * @param $trueChunk {string: chunkName} - This value is returning if result is true (chunk). Default: ''.
@@ -68,6 +68,10 @@ if (isset($operand1)){
 		case 'inarray':
 			$operand2 = explode(',', $operand2);
 			$boolOut = in_array($operand1, $operand2) ? true : false;
+		break;
+		
+		case 'isnumeric':
+			$boolOut = is_numeric($operand1);
 		break;
 		
 		case '==':
