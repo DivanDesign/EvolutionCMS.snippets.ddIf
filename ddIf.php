@@ -1,7 +1,7 @@
 <?php
 /**
  * @name ddIf.php
- * @version 1.2 (2015-02-22)
+ * @version 1.3 (2016-07-14)
  * 
  * @desc This snippet compares different values and returns required chunk or string.
  * 
@@ -17,10 +17,9 @@
  * @param $falseChunk {string: chunkName} - This value is returning if result is false (chunk). Default: ''.
  * @param $placeholders {separated string} - Additional data which is required to transfer to chunk. It`s a string separating by '::' between key-value pair and '||' between pairs. Default: ''.
  * 
- * @link http://code.divandesign.biz/modx/ddif/1.2
+ * @link http://code.divandesign.biz/modx/ddif/1.3
  * 
- * @copyright 2015, DivanDesign
- * http://www.DivanDesign.biz
+ * @copyright 2012–2016 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $result = '';
