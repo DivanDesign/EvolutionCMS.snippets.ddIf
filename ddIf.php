@@ -1,7 +1,7 @@
 <?php
 /**
  * @name ddIf.php
- * @version 1.2 (2015-02-22)
+ * @version 1.3 (2016-07-14)
  * 
  * @desc This snippet compares different values and returns required chunk or string.
  * 
@@ -10,17 +10,16 @@
  * 
  * @param $operand1 {string} - The first operand for comparing. @required
  * @param $operand2 {string} - The second operand for comparing. Default: ''.
- * @param $operator {==; !=; >; <; <=; >=; bool; inarray} - Comparing operator. Valid values: =, !=, >, <, <=, >=, bool, inarray. Default: '=='.
+ * @param $operator {==; !=; >; <; <=; >=; bool; inarray; isnumeric} - Comparing operator. Valid values: =, !=, >, <, <=, >=, bool, inarray, isnumeric. Default: '=='.
  * @param $trueString {string} - This string is returning if result is true. Default: ''.
  * @param $falseString {string} - This string is returning if result is false. Default: ''.
  * @param $trueChunk {string: chunkName} - This value is returning if result is true (chunk). Default: ''.
  * @param $falseChunk {string: chunkName} - This value is returning if result is false (chunk). Default: ''.
  * @param $placeholders {separated string} - Additional data which is required to transfer to chunk. It`s a string separating by '::' between key-value pair and '||' between pairs. Default: ''.
  * 
- * @link http://code.divandesign.biz/modx/ddif/1.2
+ * @link http://code.divandesign.biz/modx/ddif/1.3
  * 
- * @copyright 2015, DivanDesign
- * http://www.DivanDesign.biz
+ * @copyright 2012–2016 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $result = '';
@@ -29,7 +28,7 @@ $result = '';
 if (isset($operand1)){
 	//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
 	$operand2 = isset($operand2) ? $operand2 : '';
-	$operator = isset($operator) ? $operator : '==';
+	$operator = isset($operator) ? mb_strtolower($operator) : '==';
 	
 	//Булевое значение истинности сравнения
 	$boolOut = '';
@@ -68,6 +67,10 @@ if (isset($operand1)){
 		case 'inarray':
 			$operand2 = explode(',', $operand2);
 			$boolOut = in_array($operand1, $operand2) ? true : false;
+		break;
+		
+		case 'isnumeric':
+			$boolOut = is_numeric($operand1);
 		break;
 		
 		case '==':
