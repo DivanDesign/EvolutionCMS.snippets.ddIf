@@ -5,6 +5,7 @@
  * 
  * @desc This snippet compares 2 values and returns required chunk or string.
  * 
+ * @uses PHP >= 5.4.
  * @uses MODXEvo >= 1.0.13.
  * @uses MODXEvo.library.ddTools >= 0.10 (if additional data transfer is required).
  * 
@@ -87,7 +88,7 @@ if (isset($operand1)){
 		//Разбиваем их
 		$placeholders = ddTools::explodeAssoc($placeholders);
 	}else{
-		$placeholders = array();
+		$placeholders = [];
 	}
 	
 	$trueString = isset($trueString) ? $trueString : (isset($trueChunk) ? $modx->getChunk($trueChunk) : '');
