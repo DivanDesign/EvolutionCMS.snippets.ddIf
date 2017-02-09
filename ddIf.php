@@ -7,7 +7,7 @@
  * 
  * @uses PHP >= 5.4.
  * @uses MODXEvo >= 1.0.13.
- * @uses MODXEvo.library.ddTools >= 0.10 (if additional data transfer is required).
+ * @uses MODXEvo.library.ddTools >= 0.18 (if “$placeholders” is used).
  * 
  * @param $operand1 {string} — The first operand for comparing. @required
  * @param $operand2 {string} — The second operand for comparing. Default: ''.
@@ -16,7 +16,7 @@
  * @param $falseString {string} — This string is returning if result is false. Default: ''.
  * @param $trueChunk {string_chunkName} — This value is returning if result is true (chunk). Default: ''.
  * @param $falseChunk {string_chunkName} — This value is returning if result is false (chunk). Default: ''.
- * @param $placeholders {string_separated} — Additional data which is required to transfer to chunk. It`s a string separating by '::' between key-value pair and '||' between pairs. Default: ''.
+ * @param $placeholders {stirng_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
  * 
  * @link http://code.divandesign.biz/modx/ddif/1.3
  * 
@@ -83,10 +83,10 @@ if (isset($operand1)){
 	//Если есть дополнительные данные
 	if (isset($placeholders)){
 		//Подключаем modx.ddTools
-		require_once $modx->config['base_path'].'assets/snippets/ddTools/modx.ddtools.class.php';
+		require_once $modx->config['base_path'].'assets/libs/ddTools/modx.ddtools.class.php';
 		
 		//Разбиваем их
-		$placeholders = ddTools::explodeAssoc($placeholders);
+		$placeholders = ddTools::encodedStringToArray($placeholders);
 	}else{
 		$placeholders = [];
 	}
