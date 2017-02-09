@@ -1,21 +1,21 @@
 <?php
 /**
- * @name ddIf.php
+ * ddIf
  * @version 1.3 (2016-07-14)
  * 
- * @desc This snippet compares different values and returns required chunk or string.
+ * @desc This snippet compares 2 values and returns required chunk or string.
  * 
- * @uses MODX 1.0.13.
- * @uses The library modx.ddTools 0.10 (if additional data transfer is required).
+ * @uses MODXEvo >= 1.0.13.
+ * @uses MODXEvo.library.ddTools >= 0.10 (if additional data transfer is required).
  * 
- * @param $operand1 {string} - The first operand for comparing. @required
- * @param $operand2 {string} - The second operand for comparing. Default: ''.
- * @param $operator {==; !=; >; <; <=; >=; bool; inarray; isnumeric} - Comparing operator. Valid values: =, !=, >, <, <=, >=, bool, inarray, isnumeric. Default: '=='.
- * @param $trueString {string} - This string is returning if result is true. Default: ''.
- * @param $falseString {string} - This string is returning if result is false. Default: ''.
- * @param $trueChunk {string: chunkName} - This value is returning if result is true (chunk). Default: ''.
- * @param $falseChunk {string: chunkName} - This value is returning if result is false (chunk). Default: ''.
- * @param $placeholders {separated string} - Additional data which is required to transfer to chunk. It`s a string separating by '::' between key-value pair and '||' between pairs. Default: ''.
+ * @param $operand1 {string} — The first operand for comparing. @required
+ * @param $operand2 {string} — The second operand for comparing. Default: ''.
+ * @param $operator {'=='|'!='|'>'|'<'|'<='|'>='|'bool'|'inarray'|'isnumeric'} — Comparing operator. Default: '=='.
+ * @param $trueString {string} — This string is returning if result is true. Default: ''.
+ * @param $falseString {string} — This string is returning if result is false. Default: ''.
+ * @param $trueChunk {string_chunkName} — This value is returning if result is true (chunk). Default: ''.
+ * @param $falseChunk {string_chunkName} — This value is returning if result is false (chunk). Default: ''.
+ * @param $placeholders {string_separated} — Additional data which is required to transfer to chunk. It`s a string separating by '::' between key-value pair and '||' between pairs. Default: ''.
  * 
  * @link http://code.divandesign.biz/modx/ddif/1.3
  * 
