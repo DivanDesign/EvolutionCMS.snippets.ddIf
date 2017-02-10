@@ -101,20 +101,13 @@ if (isset($operand1)){
 		if (isset($falseString)){$falseChunk = '@CODE:'.$falseString;}
 	}
 	
+	//Select output chunk
+	$resultChunk = $boolOut ? (isset($trueChunk) ? $trueChunk : '') : (isset($falseChunk) ? $falseChunk : '');
+	
 	//$modx->getTpl('@CODE:') returns '@CODE:' O_o
-	$trueChunk = isset($trueChunk) && $trueChunk != '@CODE:' ? $trueChunk : '';
-	$falseChunk = isset($falseChunk) && $falseChunk != '@CODE:' ? $falseChunk : '';
+	$resultChunk = $modx->getTpl($resultChunk != '@CODE:' ? $resultChunk : '');
 	
-	$trueChunk = $modx->getTpl($trueChunk);
-	$falseChunk = $modx->getTpl($falseChunk);
-	
-	//Если значение истино
-	if($boolOut){
-		$result = $modx->parseText($trueChunk, $placeholders);
-	//Если значение ложно
-	}else{
-		$result = $modx->parseText($falseChunk, $placeholders);
-	}
+	$result = $modx->parseText($resultChunk, $placeholders);
 }
 
 return $result;
