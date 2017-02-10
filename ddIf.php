@@ -1,7 +1,7 @@
 <?php
 /**
  * ddIf
- * @version 1.3 (2016-07-14)
+ * @version 1.4 (2017-02-10)
  * 
  * @desc This snippet compares 2 values and returns required chunk or string.
  * 
@@ -16,9 +16,9 @@
  * @param $falseChunk {string_chunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Default: ''.
  * @param $placeholders {stirng_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
  * 
- * @link http://code.divandesign.biz/modx/ddif/1.3
+ * @link http://code.divandesign.biz/modx/ddif/1.4
  * 
- * @copyright 2012–2016 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2012–2017 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $result = '';
