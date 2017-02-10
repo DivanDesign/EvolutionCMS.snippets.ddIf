@@ -1,28 +1,29 @@
 <?php
 /**
- * @name ddIf.php
- * @version 1.3 (2016-07-14)
+ * ddIf
+ * @version 1.4 (2017-02-10)
  * 
- * @desc This snippet compares different values and returns required chunk or string.
+ * @desc This snippet compares 2 values and returns required chunk or string.
  * 
- * @uses MODX 1.0.13.
- * @uses The library modx.ddTools 0.10 (if additional data transfer is required).
+ * @uses PHP >= 5.4.
+ * @uses MODXEvo >= 1.1.
+ * @uses MODXEvo.library.ddTools >= 0.18.
  * 
- * @param $operand1 {string} - The first operand for comparing. @required
- * @param $operand2 {string} - The second operand for comparing. Default: ''.
- * @param $operator {==; !=; >; <; <=; >=; bool; inarray; isnumeric} - Comparing operator. Valid values: =, !=, >, <, <=, >=, bool, inarray, isnumeric. Default: '=='.
- * @param $trueString {string} - This string is returning if result is true. Default: ''.
- * @param $falseString {string} - This string is returning if result is false. Default: ''.
- * @param $trueChunk {string: chunkName} - This value is returning if result is true (chunk). Default: ''.
- * @param $falseChunk {string: chunkName} - This value is returning if result is false (chunk). Default: ''.
- * @param $placeholders {separated string} - Additional data which is required to transfer to chunk. It`s a string separating by '::' between key-value pair and '||' between pairs. Default: ''.
+ * @param $operand1 {string} — The first operand for comparing. @required
+ * @param $operand2 {string} — The second operand for comparing. Default: ''.
+ * @param $operator {'=='|'!='|'>'|'<'|'<='|'>='|'bool'|'inarray'|'isnumeric'} — Comparing operator. Default: '=='.
+ * @param $trueChunk {string_chunkName|string} — This value is returning if result is true (chunk name or code via “@CODE:” prefix). Default: ''.
+ * @param $falseChunk {string_chunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Default: ''.
+ * @param $placeholders {stirng_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
  * 
- * @link http://code.divandesign.biz/modx/ddif/1.3
+ * @link http://code.divandesign.biz/modx/ddif/1.4
  * 
- * @copyright 2012–2016 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2012–2017 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $result = '';
+
+require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
 
 //Если передано, что сравнивать
 if (isset($operand1)){
@@ -81,25 +82,32 @@ if (isset($operand1)){
 	
 	//Если есть дополнительные данные
 	if (isset($placeholders)){
-		//Подключаем modx.ddTools
-		require_once $modx->config['base_path'].'assets/snippets/ddTools/modx.ddtools.class.php';
-		
 		//Разбиваем их
-		$placeholders = ddTools::explodeAssoc($placeholders);
+		$placeholders = ddTools::encodedStringToArray($placeholders);
 	}else{
-		$placeholders = array();
+		$placeholders = [];
 	}
 	
-	$trueString = isset($trueString) ? $trueString : (isset($trueChunk) ? $modx->getChunk($trueChunk) : '');
-	$falseString = isset($falseString) ? $falseString : (isset($falseChunk) ? $modx->getChunk($falseChunk) : '');
-	
-	//Если значение истино
-	if($boolOut){
-		$result = $modx->parseText($trueString, $placeholders);
-	//Если значение ложно
-	}else{
-		$result = $modx->parseText($falseString, $placeholders);
+	//Backward compatibility
+	if (
+		isset($trueString) ||
+		isset($falseString)
+	){
+		ddTools::logEvent([
+			'message' => '<p>The “trueString” and “falseString” parameters are deprecated. Please use instead “trueChunk” and “falseChunk” with the “@CODE:” prefix.</p>'
+		]);
+		
+		if (isset($trueString)){$trueChunk = '@CODE:'.$trueString;}
+		if (isset($falseString)){$falseChunk = '@CODE:'.$falseString;}
 	}
+	
+	//Select output chunk
+	$resultChunk = $boolOut ? (isset($trueChunk) ? $trueChunk : '') : (isset($falseChunk) ? $falseChunk : '');
+	
+	//$modx->getTpl('@CODE:') returns '@CODE:' O_o
+	$resultChunk = $modx->getTpl($resultChunk != '@CODE:' ? $resultChunk : '');
+	
+	$result = $modx->parseText($resultChunk, $placeholders);
 }
 
 return $result;
