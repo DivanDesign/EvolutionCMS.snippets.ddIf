@@ -27,6 +27,10 @@ require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.cla
 
 //Если передано, что сравнивать
 if (isset($operand1)){
+	//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
+	if(mb_substr($operand1, 0, 2) == '[+') {
+		$operand1 = '';
+	}
 	//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
 	$operand2 = isset($operand2) ? $operand2 : '';
 	$operator = isset($operator) ? mb_strtolower($operator) : '==';
