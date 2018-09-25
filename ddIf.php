@@ -14,7 +14,8 @@
  * @param $operator {'=='|'!='|'>'|'<'|'<='|'>='|'bool'|'inarray'|'isnumeric'} — Comparing operator. Default: '=='.
  * @param $trueChunk {string_chunkName|string} — This value is returning if result is true (chunk name or code via “@CODE:” prefix). Default: ''.
  * @param $falseChunk {string_chunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Default: ''.
- * @param $placeholders {stirng_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
+ * @param $placeholders {string_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
+ * @param $logTitle {string} — The title for log row for the debugging data.
  * 
  * @link http://code.divandesign.biz/modx/ddif/1.4
  * 
@@ -24,6 +25,11 @@
 $result = '';
 
 require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
+
+//Если для отладки нужно вывести то что пришло в сниппет выводим
+if(isset($logTitle)){
+	$modx->logEvent(1, 1, '<code><pre>'.print_r($params, true).'</pre></code>', 'ddIf — '.$logTitle );
+}
 
 //Если передано, что сравнивать
 if (isset($operand1)){
