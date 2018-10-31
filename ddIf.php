@@ -1,7 +1,7 @@
 <?php
 /**
  * ddIf
- * @version 1.4 (2017-02-10)
+ * @version 1.5 (2018-10-31)
  * 
  * @desc This snippet compares 2 values and returns required chunk or string.
  * 
@@ -14,19 +14,40 @@
  * @param $operator {'=='|'!='|'>'|'<'|'<='|'>='|'bool'|'inarray'|'isnumeric'} — Comparing operator. Default: '=='.
  * @param $trueChunk {string_chunkName|string} — This value is returning if result is true (chunk name or code via “@CODE:” prefix). Default: ''.
  * @param $falseChunk {string_chunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Default: ''.
- * @param $placeholders {stirng_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
+ * @param $placeholders {string_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
+ * @param $debugTitle {string} — The title for the System Event log if debugging is needed.
  * 
- * @link http://code.divandesign.biz/modx/ddif/1.4
+ * @link http://code.divandesign.biz/modx/ddif/1.5
  * 
- * @copyright 2012–2017 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2012–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $result = '';
 
 require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
 
+//Если для отладки нужно вывести то что пришло в сниппет выводим
+if(isset($debugTitle)){
+	ddTools::logEvent([
+		'message' => '<p>Snippet parameters:</p><code><pre>'.var_export(
+			$params,
+			true
+		).'</pre></code>',
+		'source' => 'ddIf: '.$debugTitle
+	]);
+}
+
 //Если передано, что сравнивать
 if (isset($operand1)){
+	//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
+	if(mb_substr(
+		$operand1,
+		0,
+		2
+	) == '[+'){
+		$operand1 = '';
+	}
+	
 	//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
 	$operand2 = isset($operand2) ? $operand2 : '';
 	$operator = isset($operator) ? mb_strtolower($operator) : '==';
@@ -66,8 +87,14 @@ if (isset($operand1)){
 		break;
 		
 		case 'inarray':
-			$operand2 = explode(',', $operand2);
-			$boolOut = in_array($operand1, $operand2) ? true : false;
+			$operand2 = explode(
+				',',
+				$operand2
+			);
+			$boolOut = in_array(
+				$operand1,
+				$operand2
+			) ? true : false;
 		break;
 		
 		case 'isnumeric':
@@ -107,7 +134,10 @@ if (isset($operand1)){
 	//$modx->getTpl('@CODE:') returns '@CODE:' O_o
 	$resultChunk = $modx->getTpl($resultChunk != '@CODE:' ? $resultChunk : '');
 	
-	$result = $modx->parseText($resultChunk, $placeholders);
+	$result = $modx->parseText(
+		$resultChunk,
+		$placeholders
+	);
 }
 
 return $result;
