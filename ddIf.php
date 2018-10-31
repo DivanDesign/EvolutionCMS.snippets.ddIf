@@ -1,7 +1,7 @@
 <?php
 /**
  * ddIf
- * @version 1.4 (2017-02-10)
+ * @version 1.5 (2018-10-31)
  * 
  * @desc This snippet compares 2 values and returns required chunk or string.
  * 
@@ -17,9 +17,9 @@
  * @param $placeholders {string_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
  * @param $debugTitle {string} — The title for the System Event log if debugging is needed.
  * 
- * @link http://code.divandesign.biz/modx/ddif/1.4
+ * @link http://code.divandesign.biz/modx/ddif/1.5
  * 
- * @copyright 2012–2017 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2012–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $result = '';
