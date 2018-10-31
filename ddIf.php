@@ -28,15 +28,13 @@ require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.cla
 
 //Если для отладки нужно вывести то что пришло в сниппет выводим
 if(isset($logTitle)){
-	$modx->logEvent(
-		1,
-		1,
-		'<code><pre>'.print_r(
+	ddTools::logEvent([
+		'message' => '<code><pre>'.print_r(
 			$params,
 			true
 		).'</pre></code>',
-		'ddIf — '.$logTitle
-	);
+		'source' => 'ddIf — '.$logTitle
+	]);
 }
 
 //Если передано, что сравнивать
