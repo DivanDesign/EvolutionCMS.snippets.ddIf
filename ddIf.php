@@ -28,15 +28,28 @@ require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.cla
 
 //Если для отладки нужно вывести то что пришло в сниппет выводим
 if(isset($logTitle)){
-	$modx->logEvent(1, 1, '<code><pre>'.print_r($params, true).'</pre></code>', 'ddIf — '.$logTitle );
+	$modx->logEvent(
+		1,
+		1,
+		'<code><pre>'.print_r(
+			$params,
+			true
+		).'</pre></code>',
+		'ddIf — '.$logTitle
+	);
 }
 
 //Если передано, что сравнивать
 if (isset($operand1)){
 	//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
-	if(mb_substr($operand1, 0, 2) == '[+') {
+	if(mb_substr(
+		$operand1,
+		0,
+		2
+	) == '[+'){
 		$operand1 = '';
 	}
+	
 	//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
 	$operand2 = isset($operand2) ? $operand2 : '';
 	$operator = isset($operator) ? mb_strtolower($operator) : '==';
@@ -76,8 +89,14 @@ if (isset($operand1)){
 		break;
 		
 		case 'inarray':
-			$operand2 = explode(',', $operand2);
-			$boolOut = in_array($operand1, $operand2) ? true : false;
+			$operand2 = explode(
+				',',
+				$operand2
+			);
+			$boolOut = in_array(
+				$operand1,
+				$operand2
+			) ? true : false;
 		break;
 		
 		case 'isnumeric':
@@ -117,7 +136,10 @@ if (isset($operand1)){
 	//$modx->getTpl('@CODE:') returns '@CODE:' O_o
 	$resultChunk = $modx->getTpl($resultChunk != '@CODE:' ? $resultChunk : '');
 	
-	$result = $modx->parseText($resultChunk, $placeholders);
+	$result = $modx->parseText(
+		$resultChunk,
+		$placeholders
+	);
 }
 
 return $result;
