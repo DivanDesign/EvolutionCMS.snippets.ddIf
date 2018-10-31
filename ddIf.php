@@ -29,11 +29,11 @@ require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.cla
 //Если для отладки нужно вывести то что пришло в сниппет выводим
 if(isset($logTitle)){
 	ddTools::logEvent([
-		'message' => '<code><pre>'.print_r(
+		'message' => '<p>Snippet parameters:</p><code><pre>'.var_export(
 			$params,
 			true
 		).'</pre></code>',
-		'source' => 'ddIf — '.$logTitle
+		'source' => 'ddIf: '.$logTitle
 	]);
 }
 
