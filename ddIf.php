@@ -15,7 +15,7 @@
  * @param $trueChunk {string_chunkName|string} — This value is returning if result is true (chunk name or code via “@CODE:” prefix). Default: ''.
  * @param $falseChunk {string_chunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Default: ''.
  * @param $placeholders {string_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
- * @param $logTitle {string} — The title for log row for the debugging data.
+ * @param $debugTitle {string} — The title for the System Event log if debugging is needed.
  * 
  * @link http://code.divandesign.biz/modx/ddif/1.4
  * 
@@ -27,13 +27,13 @@ $result = '';
 require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
 
 //Если для отладки нужно вывести то что пришло в сниппет выводим
-if(isset($logTitle)){
+if(isset($debugTitle)){
 	ddTools::logEvent([
 		'message' => '<p>Snippet parameters:</p><code><pre>'.var_export(
 			$params,
 			true
 		).'</pre></code>',
-		'source' => 'ddIf: '.$logTitle
+		'source' => 'ddIf: '.$debugTitle
 	]);
 }
 
