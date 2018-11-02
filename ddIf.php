@@ -15,7 +15,7 @@
  * @param $trueChunk {string_chunkName|string} — This value is returning if result is true (chunk name or code via “@CODE:” prefix). Default: ''.
  * @param $falseChunk {string_chunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Default: ''.
  * @param $placeholders {string_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
- * @param $debugTitle {string} — The title for the System Event log if debugging is needed.
+ * @param $debugTitle {string} — The title for the System Event log if debugging is needed. just set it and watch the System Event log. Default: —.
  * 
  * @link http://code.divandesign.biz/modx/ddif/1.5
  * 
