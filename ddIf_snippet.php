@@ -6,8 +6,8 @@
  * @desc This snippet compares 2 values and returns required chunk or string.
  * 
  * @uses PHP >= 5.4.
- * @uses MODXEvo >= 1.1.
- * @uses MODXEvo.library.ddTools >= 0.18.
+ * @uses (MODX)EvolutionCMS >= 1.1.
+ * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.18.
  * 
  * @param $operand1 {string} — The first operand for comparing. @required
  * @param $operand2 {string} — The second operand for comparing. Default: ''.

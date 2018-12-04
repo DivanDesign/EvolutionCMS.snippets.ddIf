@@ -1,4 +1,4 @@
-# ddIf
+# (MODX)EvolutionCMS.snippets.ddIf
 
 This snippet compares 2 values and returns required chunk or string.
 ___
