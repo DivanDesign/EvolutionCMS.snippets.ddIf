@@ -12,8 +12,8 @@
  * @param $operand1 {string} — The first operand for comparing. @required
  * @param $operand2 {string} — The second operand for comparing. Default: ''.
  * @param $operator {'=='|'!='|'>'|'<'|'<='|'>='|'bool'|'inarray'|'isnumeric'} — Comparing operator. Default: '=='.
- * @param $trueChunk {string_chunkName|string} — This value is returning if result is true (chunk name or code via “@CODE:” prefix). Default: ''.
- * @param $falseChunk {string_chunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Default: ''.
+ * @param $trueChunk {string_chunkName|string} — This value is returning if result is true (chunk name or code via “@CODE:” prefix). Available placeholders: [+ddIf_operand1+], [+ddIf_operand2+], [+ddIf_operator+], [+anyPlaceholdersFromPlaceholdersParam+]. Default: ''.
+ * @param $falseChunk {string_chunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Available placeholders: [+ddIf_operand1+], [+ddIf_operand2+], [+ddIf_operator+], [+anyPlaceholdersFromPlaceholdersParam+]. Default: ''.
  * @param $placeholders {string_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
  * @param $debugTitle {string} — The title for the System Event log if debugging is needed. just set it and watch the System Event log. Default: —.
  * 
@@ -87,13 +87,13 @@ if (isset($operand1)){
 		break;
 		
 		case 'inarray':
-			$operand2 = explode(
+			$operand2Array = explode(
 				',',
 				$operand2
 			);
 			$boolOut = in_array(
 				$operand1,
-				$operand2
+				$operand2Array
 			) ? true : false;
 		break;
 		
@@ -136,7 +136,14 @@ if (isset($operand1)){
 	
 	$result = $modx->parseText(
 		$resultChunk,
-		$placeholders
+		array_merge(
+			[
+				'ddIf_operand1' => $operand1,
+				'ddIf_operand2' => $operand2,
+				'ddIf_operator' => $operator
+			],
+			$placeholders
+		)
 	);
 }
 
