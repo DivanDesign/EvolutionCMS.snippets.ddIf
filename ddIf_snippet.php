@@ -1,7 +1,7 @@
 <?php
 /**
  * ddIf
- * @version 1.5 (2018-10-31)
+ * @version 1.6 (2018-12-05)
  * 
  * @desc This snippet compares 2 values and returns required chunk or string.
  * 
@@ -15,9 +15,9 @@
  * @param $trueChunk {string_chunkName|string} — This value is returning if result is true (chunk name or code via “@CODE:” prefix). Available placeholders: [+ddIf_operand1+], [+ddIf_operand2+], [+ddIf_operator+], [+anyPlaceholdersFromPlaceholdersParam+]. Default: ''.
  * @param $falseChunk {string_chunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Available placeholders: [+ddIf_operand1+], [+ddIf_operand2+], [+ddIf_operator+], [+anyPlaceholdersFromPlaceholdersParam+]. Default: ''.
  * @param $placeholders {string_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
- * @param $debugTitle {string} — The title for the System Event log if debugging is needed. just set it and watch the System Event log. Default: —.
+ * @param $debugTitle {string} — The title for the System Event log if debugging is needed. Just set it and watch the System Event log. Default: —.
  * 
- * @link http://code.divandesign.biz/modx/ddif/1.5
+ * @link http://code.divandesign.biz/modx/ddif/1.6
  * 
  * @copyright 2012–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
