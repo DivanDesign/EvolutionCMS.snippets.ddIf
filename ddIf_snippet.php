@@ -22,18 +22,19 @@
  * @copyright 2012–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
-$result = '';
+//Include (MODX)EvolutionCMS.libraries.ddTools
+require_once($modx->getConfig('base_path') . 'assets/libs/ddTools/modx.ddtools.class.php');
 
-require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
+$result = '';
 
 //Если для отладки нужно вывести то что пришло в сниппет выводим
 if(isset($debugTitle)){
 	ddTools::logEvent([
-		'message' => '<p>Snippet parameters:</p><code><pre>'.var_export(
+		'message' => '<p>Snippet parameters:</p><code><pre>' . var_export(
 			$params,
 			true
-		).'</pre></code>',
-		'source' => 'ddIf: '.$debugTitle
+		) . '</pre></code>',
+		'source' => 'ddIf: ' . $debugTitle
 	]);
 }
 
@@ -49,8 +50,16 @@ if (isset($operand1)){
 	}
 	
 	//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
-	$operand2 = isset($operand2) ? $operand2 : '';
-	$operator = isset($operator) ? mb_strtolower($operator) : '==';
+	$operand2 =
+		isset($operand2) ?
+		$operand2 :
+		''
+	;
+	$operator =
+		isset($operator) ?
+		mb_strtolower($operator) :
+		'=='
+	;
 	
 	//Булевое значение истинности сравнения
 	$boolOut = '';
@@ -59,31 +68,55 @@ if (isset($operand1)){
 		case '!=':
 		//Backward compatibility
 		case '!r':
-			$boolOut = ($operand1 != $operand2) ? true : false;
+			$boolOut =
+				($operand1 != $operand2) ?
+				true :
+				false
+			;
 		break;
 		
 		case '>':
 		case 'b':
-			$boolOut = ($operand1 > $operand2) ? true : false;
+			$boolOut =
+				($operand1 > $operand2) ?
+				true :
+				false
+			;
 		break;
 		
 		case '<':
 		case 'm':
-			$boolOut = ($operand1 < $operand2) ? true : false;
+			$boolOut =
+				($operand1 < $operand2) ?
+				true :
+				false
+			;
 		break;
 		
 		case '>=':
 		case 'br':
-			$boolOut = ($operand1 >= $operand2) ? true : false;
+			$boolOut =
+				($operand1 >= $operand2) ?
+				true :
+				false
+			;
 		break;
 		
 		case '<=':
 		case 'mr':
-			$boolOut = ($operand1 <= $operand2) ? true : false;
+			$boolOut =
+				($operand1 <= $operand2) ?
+				true :
+				false
+			;
 		break;
 		
 		case 'bool':
-			$boolOut = ($operand1) ? true : false;
+			$boolOut =
+				($operand1) ?
+				true :
+				false
+			;
 		break;
 		
 		case 'inarray':
@@ -91,10 +124,14 @@ if (isset($operand1)){
 				',',
 				$operand2
 			);
-			$boolOut = in_array(
-				$operand1,
-				$operand2Array
-			) ? true : false;
+			$boolOut =
+				in_array(
+					$operand1,
+					$operand2Array
+				) ?
+				true :
+				false
+			;
 		break;
 		
 		case 'isnumeric':
@@ -104,7 +141,11 @@ if (isset($operand1)){
 		case '==':
 		case 'r':
 		default:
-			$boolOut = ($operand1 == $operand2) ? true : false;
+			$boolOut =
+				($operand1 == $operand2) ?
+				true :
+				false
+			;
 	}
 	
 	//Если есть дополнительные данные
@@ -129,10 +170,25 @@ if (isset($operand1)){
 	}
 	
 	//Select output chunk
-	$resultChunk = $boolOut ? (isset($trueChunk) ? $trueChunk : '') : (isset($falseChunk) ? $falseChunk : '');
+	$resultChunk =
+		$boolOut ?
+		(
+			isset($trueChunk) ?
+			$trueChunk :
+			''
+		) :
+		(
+			isset($falseChunk) ?
+			$falseChunk :
+			''
+		);
 	
 	//$modx->getTpl('@CODE:') returns '@CODE:' O_o
-	$resultChunk = $modx->getTpl($resultChunk != '@CODE:' ? $resultChunk : '');
+	$resultChunk = $modx->getTpl(
+		$resultChunk != '@CODE:' ?
+		$resultChunk :
+		''
+	);
 	
 	$result = $modx->parseText(
 		$resultChunk,
