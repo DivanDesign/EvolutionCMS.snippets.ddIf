@@ -28,7 +28,8 @@ require_once(
 	'assets/libs/ddTools/modx.ddtools.class.php'
 );
 
-$result = '';
+//The snippet must return an empty string even if result is absent
+$snippetResult = '';
 
 //Если для отладки нужно вывести то что пришло в сниппет выводим
 if(isset($debugTitle)){
@@ -208,7 +209,7 @@ if (isset($operand1)){
 		''
 	);
 	
-	$result = $modx->parseText(
+	$snippetResult = $modx->parseText(
 		$resultChunk,
 		array_merge(
 			[
@@ -221,5 +222,5 @@ if (isset($operand1)){
 	);
 }
 
-return $result;
+return $snippetResult;
 ?>
