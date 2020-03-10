@@ -23,17 +23,24 @@
  */
 
 //Include (MODX)EvolutionCMS.libraries.ddTools
-require_once($modx->getConfig('base_path') . 'assets/libs/ddTools/modx.ddtools.class.php');
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddTools/modx.ddtools.class.php'
+);
 
 $result = '';
 
 //Если для отладки нужно вывести то что пришло в сниппет выводим
 if(isset($debugTitle)){
-	ddTools::logEvent([
-		'message' => '<p>Snippet parameters:</p><code><pre>' . var_export(
-			$params,
-			true
-		) . '</pre></code>',
+	\ddTools::logEvent([
+		'message' =>
+			'<p>Snippet parameters:</p><code><pre>' .
+			var_export(
+				$params,
+				true
+			) .
+			'</pre></code>'
+		,
 		'source' => 'ddIf: ' . $debugTitle
 	]);
 }
@@ -151,7 +158,7 @@ if (isset($operand1)){
 	//Если есть дополнительные данные
 	if (isset($placeholders)){
 		//Разбиваем их
-		$placeholders = ddTools::encodedStringToArray($placeholders);
+		$placeholders = \ddTools::encodedStringToArray($placeholders);
 	}else{
 		$placeholders = [];
 	}
@@ -161,12 +168,23 @@ if (isset($operand1)){
 		isset($trueString) ||
 		isset($falseString)
 	){
-		ddTools::logEvent([
+		\ddTools::logEvent([
 			'message' => '<p>The “trueString” and “falseString” parameters are deprecated. Please use instead “trueChunk” and “falseChunk” with the “@CODE:” prefix.</p>'
 		]);
 		
-		if (isset($trueString)){$trueChunk = '@CODE:'.$trueString;}
-		if (isset($falseString)){$falseChunk = '@CODE:'.$falseString;}
+		if (isset($trueString)){
+			$trueChunk =
+				'@CODE:' .
+				$trueString
+			;
+		}
+		
+		if (isset($falseString)){
+			$falseChunk =
+				'@CODE:' .
+				$falseString
+			;
+		}
 	}
 	
 	//Select output chunk
