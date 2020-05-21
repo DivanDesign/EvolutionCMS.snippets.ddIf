@@ -17,10 +17,12 @@
  * @param $placeholders {string_json|string_queryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Default: ''.
  * @param $debugTitle {string} — The title for the System Event log if debugging is needed. Just set it and watch the System Event log. Default: —.
  * 
- * @link http://code.divandesign.biz/modx/ddif/1.6
+ * @link https://code.divandesign.biz/modx/ddif
  * 
- * @copyright 2012–2018 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2012–2018 DD Group {@link https://DivanDesign.biz }
  */
+
+global $modx;
 
 //Include (MODX)EvolutionCMS.libraries.ddTools
 require_once(
@@ -42,18 +44,22 @@ if(isset($debugTitle)){
 			) .
 			'</pre></code>'
 		,
-		'source' => 'ddIf: ' . $debugTitle
+		'source' =>
+			'ddIf: ' .
+			$debugTitle
 	]);
 }
 
 //Если передано, что сравнивать
 if (isset($operand1)){
 	//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
-	if(mb_substr(
-		$operand1,
-		0,
-		2
-	) == '[+'){
+	if(
+		mb_substr(
+			$operand1,
+			0,
+			2
+		) == '[+'
+	){
 		$operand1 = '';
 	}
 	
@@ -71,13 +77,14 @@ if (isset($operand1)){
 	
 	//Булевое значение истинности сравнения
 	$boolOut = '';
+	
 	//Выбираем сравнение в зависимости от оператора
 	switch ($operator){
 		case '!=':
 		//Backward compatibility
 		case '!r':
 			$boolOut =
-				($operand1 != $operand2) ?
+				$operand1 != $operand2 ?
 				true :
 				false
 			;
@@ -86,7 +93,7 @@ if (isset($operand1)){
 		case '>':
 		case 'b':
 			$boolOut =
-				($operand1 > $operand2) ?
+				$operand1 > $operand2 ?
 				true :
 				false
 			;
@@ -95,7 +102,7 @@ if (isset($operand1)){
 		case '<':
 		case 'm':
 			$boolOut =
-				($operand1 < $operand2) ?
+				$operand1 < $operand2 ?
 				true :
 				false
 			;
@@ -104,7 +111,7 @@ if (isset($operand1)){
 		case '>=':
 		case 'br':
 			$boolOut =
-				($operand1 >= $operand2) ?
+				$operand1 >= $operand2 ?
 				true :
 				false
 			;
@@ -113,7 +120,7 @@ if (isset($operand1)){
 		case '<=':
 		case 'mr':
 			$boolOut =
-				($operand1 <= $operand2) ?
+				$operand1 <= $operand2 ?
 				true :
 				false
 			;
@@ -121,7 +128,7 @@ if (isset($operand1)){
 		
 		case 'bool':
 			$boolOut =
-				($operand1) ?
+				$operand1 ?
 				true :
 				false
 			;
@@ -132,6 +139,7 @@ if (isset($operand1)){
 				',',
 				$operand2
 			);
+			
 			$boolOut =
 				in_array(
 					$operand1,
@@ -150,7 +158,7 @@ if (isset($operand1)){
 		case 'r':
 		default:
 			$boolOut =
-				($operand1 == $operand2) ?
+				$operand1 == $operand2 ?
 				true :
 				false
 			;
@@ -200,7 +208,8 @@ if (isset($operand1)){
 			isset($falseChunk) ?
 			$falseChunk :
 			''
-		);
+		)
+	;
 	
 	//$modx->getTpl('@CODE:') returns '@CODE:' O_o
 	$resultChunk = $modx->getTpl(
