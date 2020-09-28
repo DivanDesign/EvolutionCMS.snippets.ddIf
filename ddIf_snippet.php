@@ -3,19 +3,7 @@
  * ddIf
  * @version 1.6 (2018-12-05)
  * 
- * @desc This snippet compares 2 values and returns required chunk or string.
- * 
- * @uses PHP >= 5.4
- * @uses (MODX)EvolutionCMS >= 1.1
- * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.18
- * 
- * @param $operand1 {string} — The first operand for comparing. @required
- * @param $operand2 {string} — The second operand for comparing. Default: ''.
- * @param $operator {'=='|'!='|'>'|'<'|'<='|'>='|'bool'|'inarray'|'isnumeric'} — Comparing operator. Default: '=='.
- * @param $trueChunk {stringChunkName|string} — This value is returning if result is true (chunk name or code via “@CODE:” prefix). Available placeholders: [+ddIf_operand1+], [+ddIf_operand2+], [+ddIf_operator+], [+anyPlaceholdersFromPlaceholdersParam+]. Default: ''.
- * @param $falseChunk {stringChunkName|string} — This value is returning if result is false (chunk name or code via “@CODE:” prefix). Available placeholders: [+ddIf_operand1+], [+ddIf_operand2+], [+ddIf_operator+], [+anyPlaceholdersFromPlaceholdersParam+]. Default: ''.
- * @param $placeholders {stringJson|stringQueryFormated} — Additional data which is required to transfer to chunk. JSON or query-formated string, e. g.: '{"width": 800, "height": 600}' or 'width=800&height=600'. Nested arrays are supported too. Default: ''.
- * @param $debugTitle {string} — The title for the System Event log if debugging is needed. Just set it and watch the System Event log. Default: —.
+ * @see README.md
  * 
  * @link https://code.divandesign.biz/modx/ddif
  * 
