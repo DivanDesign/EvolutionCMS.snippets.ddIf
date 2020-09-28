@@ -1,13 +1,13 @@
 <?php
 /**
  * ddIf
- * @version 1.6 (2018-12-05)
+ * @version 1.7 (2020-09-28)
  * 
  * @see README.md
  * 
  * @link https://code.divandesign.biz/modx/ddif
  * 
- * @copyright 2012–2018 DD Group {@link https://DivanDesign.biz }
+ * @copyright 2012–2020 DD Group {@link https://DivanDesign.biz }
  */
 
 global $modx;

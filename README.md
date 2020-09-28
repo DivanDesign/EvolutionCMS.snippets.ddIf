@@ -7,7 +7,7 @@ This snippet compares different values and returns required chunk or string.
 
 * PHP >= 5.4
 * [(MODX)EvolutionCMS](https://github.com/evolution-cms/evolution) >= 1.1
-* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.18
+* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.40.1 (not tested with older versions)
 
 
 ## Documentation
@@ -18,7 +18,7 @@ This snippet compares different values and returns required chunk or string.
 Elements → Snippets: Create a new snippet with the following data:
 
 1. Snippet name: `ddIf`.
-2. Description: `<b>1.6</b> This snippet compares different values and returns required chunk or string.`.
+2. Description: `<b>1.7</b> This snippet compares different values and returns required chunk or string.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.

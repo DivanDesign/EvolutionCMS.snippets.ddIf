@@ -1,8 +1,8 @@
 {
 	"name": "dd/evolutioncms-snippets-ddif",
 	"type": "modxevo-snippet",
-	"version": "1.6",
-	"description": "This snippet compares 2 values and returns required chunk or string.",
+	"version": "1.7",
+	"description": "This snippet compares different values and returns required chunk or string.",
 	"keywords": [
 		"modx",
 		"modx evo",
@@ -43,6 +43,6 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
-		"dd/evolutioncms-libraries-ddtools": ">=0.18.0"
+		"dd/evolutioncms-libraries-ddtools": ">=0.40.1"
 	}
 }

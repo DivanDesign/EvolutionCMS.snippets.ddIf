@@ -1,6 +1,16 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Version 1.7 (2020-09-28)
+* \* Attention! (MODX)Evolution.libraries.ddTools >= 0.40.1 is required (not tested with older versions).
+* \+ Parameters → `placeholders`: Nested arrays are supported too.
+* \+ README.
+* \+ README_ru.
+* \+ CHANGELOG.
+* \+ CHANGELOG_ru.
+* \+ Composer.json.
+
+
 ## Version 1.6 (2018-12-05)
 * \+ Parameters → `trueChunk`, `falseChunk`: Added few placeholders:
 	* \+ `[+ddIf_operand1+]` — contains `operand1` value.

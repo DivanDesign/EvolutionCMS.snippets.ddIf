@@ -1,6 +1,16 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Версия 1.7 (2020-09-28)
+* \* Внимание! Требуется (MODX)Evolution.libraries.ddTools >= 0.40.1 (не тестировался с более старыми версиями).
+* \+ Parameters → `placeholders`: Вложенные массивы также поддерживаются.
+* \+ README.
+* \+ README_ru.
+* \+ CHANGELOG.
+* \+ CHANGELOG_ru.
+* \+ Composer.json.
+
+
 ## Версия 1.6 (2018-12-05)
 * \+ Параметры → `trueChunk`, `falseChunk`: Добавлено несколько плейсхолдеров:
 	* \+ `[+ddIf_operand1+]` — содержит значение `operand1`.
