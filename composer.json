@@ -1,7 +1,7 @@
 {
 	"name": "dd/evolutioncms-snippets-ddif",
 	"type": "modxevo-snippet",
-	"version": "1.7",
+	"version": "1.7.1",
 	"description": "This snippet compares different values and returns required chunk or string.",
 	"keywords": [
 		"modx",
