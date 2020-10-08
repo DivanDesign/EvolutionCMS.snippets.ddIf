@@ -18,7 +18,7 @@ This snippet compares different values and returns required chunk or string.
 Elements → Snippets: Create a new snippet with the following data:
 
 1. Snippet name: `ddIf`.
-2. Description: `<b>1.7</b> This snippet compares different values and returns required chunk or string.`.
+2. Description: `<b>1.7.1</b> This snippet compares different values and returns required chunk or string.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.
@@ -27,7 +27,8 @@ Elements → Snippets: Create a new snippet with the following data:
 ### Parameters description
 
 * `operand1`
-	* Desctription: The first operand for comparing.
+	* Desctription: The first operand for comparing.  
+		An empty unparsed placeholder (like `'[+somePlaceholder+]'`) will be interpretated as empty string (`''`).
 	* Valid values: `string`
 	* **Required**
 	

@@ -1,6 +1,10 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Version 1.7.1 (2020-10-08)
+* \* Parameters → `operand1`: Improved an empty unparsed placeholder recognition.
+
+
 ## Version 1.7 (2020-09-28)
 * \* Attention! (MODX)Evolution.libraries.ddTools >= 0.40.1 is required (not tested with older versions).
 * \+ Parameters → `placeholders`: Nested arrays are supported too.

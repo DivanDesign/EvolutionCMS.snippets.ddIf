@@ -1,7 +1,7 @@
 <?php
 /**
  * ddIf
- * @version 1.7 (2020-09-28)
+ * @version 1.7.1 (2020-10-08)
  * 
  * @see README.md
  * 
@@ -46,7 +46,11 @@ if (isset($operand1)){
 			$operand1,
 			0,
 			2
-		) == '[+'
+		) == '[+' &&
+		mb_substr(
+			$operand1,
+			-2
+		) == '+]'
 	){
 		$operand1 = '';
 	}
