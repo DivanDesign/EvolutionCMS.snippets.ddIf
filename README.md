@@ -27,7 +27,8 @@ Elements → Snippets: Create a new snippet with the following data:
 ### Parameters description
 
 * `operand1`
-	* Desctription: The first operand for comparing.
+	* Desctription: The first operand for comparing.  
+		An empty unparsed placeholder (like `'[+somePlaceholder+]'`) will be interpretated as empty string (`''`).
 	* Valid values: `string`
 	* **Required**
 	

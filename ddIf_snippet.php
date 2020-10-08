@@ -46,7 +46,11 @@ if (isset($operand1)){
 			$operand1,
 			0,
 			2
-		) == '[+'
+		) == '[+' &&
+		mb_substr(
+			$operand1,
+			-2
+		) == '+]'
 	){
 		$operand1 = '';
 	}
