@@ -18,7 +18,7 @@
 Элементы → Сниппеты: Создайте новый сниппет со следующими параметрами:
 
 1. Название сниппета: `ddIf`.
-2. Описание: `<b>1.7.1</b> Сравнивает значения и выводит необходимый чанк или строку.`.
+2. Описание: `<b>2.0</b> Сравнивает значения и выводит необходимый чанк или строку.`.
 3. Категория: `Core`.
 4. Анализировать DocBlock: `no`.
 5. Код сниппета (php): Вставьте содержимое файла `ddIf_snippet.php` из архива.
@@ -54,9 +54,9 @@
 * `trueChunk`
 	* Описание: Значение, возвращаемое при истинном условии.
 		Доступные плейсхолдеры:
-		* `[+ddIf_operand1+]` — содержит значение `operand1`.
-		* `[+ddIf_operand2+]` — содержит значение `operand2`.
-		* `[+ddIf_operator+]` — содержит значение `operator`.
+		* `[+snippetParams.operand1+]` — содержит значение `operand1`.
+		* `[+snippetParams.operand2+]` — содержит значение `operand2`.
+		* `[+snippetParams.operator+]` — содержит значение `operator`.
 		* `[+`любой плейсхолдер из параметра `placeholders` `+]`
 	* Допустимые значения:
 		* `stringChunkName`
@@ -66,9 +66,9 @@
 * `falseChunk`
 	* Описание: Значение, возвращаемое при ложном условии. 
 		Доступные плейсхолдеры:
-		* `[+ddIf_operand1+]` — содержит значение `operand1`.
-		* `[+ddIf_operand2+]` — содержит значение `operand2`.
-		* `[+ddIf_operator+]` — содержит значение `operator`.
+		* `[+snippetParams.operand1+]` — содержит значение `operand1`.
+		* `[+snippetParams.operand2+]` — содержит значение `operand2`.
+		* `[+snippetParams.operator+]` — содержит значение `operator`.
 		* `[+`любой плейсхолдер из параметра `placeholders` `+]`
 	* Допустимые значения:
 		* `stringChunkName`
@@ -177,7 +177,7 @@
 
 ```html
 <div>
-	<h2>[+title+], $[+ddIf_operand1+]</h2>
+	<h2>[+title+], $[+snippetParams.operand1+]</h2>
 	<img src="[+image+]" alt="[+title+]" />
 </div>
 ```
@@ -186,7 +186,7 @@
 
 ```html
 <div class="inexpensive">
-	<h2>[+title+], <strong>$[+ddIf_operand1+]</strong></h2>
+	<h2>[+title+], <strong>$[+snippetParams.operand1+]</strong></h2>
 	<img src="[+image+]" alt="[+title+]" />
 	<p>[+somethingText+]</p>
 </div>
@@ -206,6 +206,7 @@
 
 * [Home page](https://code.divandesign.ru/modx/ddif)
 * [Telegram chat](https://t.me/dd_code)
+* [Packagist](https://packagist.org/packages/dd/evolutioncms-snippets-ddif)
 
 
 <link rel="stylesheet" type="text/css" href="https://DivanDesign.ru/assets/files/ddMarkdown.css" />

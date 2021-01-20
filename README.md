@@ -18,7 +18,7 @@ This snippet compares different values and returns required chunk or string.
 Elements → Snippets: Create a new snippet with the following data:
 
 1. Snippet name: `ddIf`.
-2. Description: `<b>1.7.1</b> This snippet compares different values and returns required chunk or string.`.
+2. Description: `<b>2.0</b> This snippet compares different values and returns required chunk or string.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.
@@ -54,9 +54,9 @@ Elements → Snippets: Create a new snippet with the following data:
 * `trueChunk`
 	* Desctription: This value is returning if result is true.
 		Available placeholders:
-		* `[+ddIf_operand1+]` — contains `operand1` value.
-		* `[+ddIf_operand2+]` — contains `operand2` value.
-		* `[+ddIf_operator+]` — contains `operator` value.
+		* `[+snippetParams.operand1+]` — contains `operand1` value.
+		* `[+snippetParams.operand2+]` — contains `operand2` value.
+		* `[+snippetParams.operator+]` — contains `operator` value.
 		* `[+`any placeholders from the `placeholders` parameter`+]`
 	* Valid values:
 		* `stringChunkName`
@@ -66,9 +66,9 @@ Elements → Snippets: Create a new snippet with the following data:
 * `falseChunk`
 	* Desctription: This value is returning if result is false. 
 		Available placeholders:
-		* `[+ddIf_operand1+]` — contains `operand1` value.
-		* `[+ddIf_operand2+]` — contains `operand2` value.
-		* `[+ddIf_operator+]` — contains `operator` value.
+		* `[+snippetParams.operand1+]` — contains `operand1` value.
+		* `[+snippetParams.operand2+]` — contains `operand2` value.
+		* `[+snippetParams.operator+]` — contains `operator` value.
 		* `[+`any placeholders from the `placeholders` parameter`+]`
 	* Valid values:
 		* `stringChunkName`
@@ -177,7 +177,7 @@ Code of the `general_good` chunk:
 
 ```html
 <div>
-	<h2>[+title+], $[+ddIf_operand1+]</h2>
+	<h2>[+title+], $[+snippetParams.operand1+]</h2>
 	<img src="[+image+]" alt="[+title+]" />
 </div>
 ```
@@ -186,7 +186,7 @@ Code of the `general_goodInexpensive` chunk:
 
 ```html
 <div class="inexpensive">
-	<h2>[+title+], <strong>$[+ddIf_operand1+]</strong></h2>
+	<h2>[+title+], <strong>$[+snippetParams.operand1+]</strong></h2>
 	<img src="[+image+]" alt="[+title+]" />
 	<p>[+somethingText+]</p>
 </div>
@@ -206,6 +206,7 @@ Let `[*general_price*]` be equal to `120`, then the snippet returns:
 
 * [Home page](https://code.divandesign.biz/modx/ddif)
 * [Telegram chat](https://t.me/dd_code)
+* [Packagist](https://packagist.org/packages/dd/evolutioncms-snippets-ddif)
 
 
 <link rel="stylesheet" type="text/css" href="https://DivanDesign.ru/assets/files/ddMarkdown.css" />

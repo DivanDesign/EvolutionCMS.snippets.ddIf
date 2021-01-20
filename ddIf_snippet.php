@@ -1,13 +1,13 @@
 <?php
 /**
  * ddIf
- * @version 1.7.1 (2020-10-08)
+ * @version 2.0 (2021-01-20)
  * 
  * @see README.md
  * 
  * @link https://code.divandesign.biz/modx/ddif
  * 
- * @copyright 2012–2020 DD Group {@link https://DivanDesign.biz }
+ * @copyright 2012–2021 DD Group {@link https://DivanDesign.biz }
  */
 
 global $modx;
@@ -21,62 +21,57 @@ require_once(
 //The snippet must return an empty string even if result is absent
 $snippetResult = '';
 
-//Если для отладки нужно вывести то что пришло в сниппет выводим
-if(isset($debugTitle)){
-	\ddTools::logEvent([
-		'message' =>
-			'<p>Snippet parameters:</p><code><pre>' .
-			var_export(
-				$params,
-				true
-			) .
-			'</pre></code>'
-		,
-		'source' =>
-			'ddIf: ' .
-			$debugTitle
-	]);
-}
+//Defaults
+$params = \DDTools\ObjectTools::extend([
+	'objects' => [
+		(object) [
+			//Required
+			'operand1' => NULL,
+			//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
+			'operand2' => '',
+			'operator' => '==',
+			'trueChunk' => '',
+			'falseChunk' => '',
+			'placeholders' => [],
+			//Unset
+			'debugTitle' => NULL
+		],
+		$params
+	]
+]);
 
 //Если передано, что сравнивать
-if (isset($operand1)){
+if (!is_null($params->operand1)){
 	//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
 	if(
 		mb_substr(
-			$operand1,
+			$params->operand1,
 			0,
 			2
 		) == '[+' &&
 		mb_substr(
-			$operand1,
+			$params->operand1,
 			-2
 		) == '+]'
 	){
-		$operand1 = '';
+		$params->operand1 = '';
 	}
 	
-	//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
-	$operand2 =
-		isset($operand2) ?
-		$operand2 :
-		''
-	;
-	$operator =
-		isset($operator) ?
-		mb_strtolower($operator) :
-		'=='
-	;
+	$params->operator =	mb_strtolower($params->operator);
+	
+	//Разбиваем дополнительные данные
+	$params->placeholders = \ddTools::encodedStringToArray($params->placeholders);
 	
 	//Булевое значение истинности сравнения
 	$boolOut = '';
 	
 	//Выбираем сравнение в зависимости от оператора
-	switch ($operator){
+	switch ($params->operator){
 		case '!=':
 		//Backward compatibility
 		case '!r':
 			$boolOut =
-				$operand1 != $operand2 ?
+				$params->operand1 != $params->operand2 ?
 				true :
 				false
 			;
@@ -85,7 +80,7 @@ if (isset($operand1)){
 		case '>':
 		case 'b':
 			$boolOut =
-				$operand1 > $operand2 ?
+				$params->operand1 > $params->operand2 ?
 				true :
 				false
 			;
@@ -94,7 +89,7 @@ if (isset($operand1)){
 		case '<':
 		case 'm':
 			$boolOut =
-				$operand1 < $operand2 ?
+				$params->operand1 < $params->operand2 ?
 				true :
 				false
 			;
@@ -103,7 +98,7 @@ if (isset($operand1)){
 		case '>=':
 		case 'br':
 			$boolOut =
-				$operand1 >= $operand2 ?
+				$params->operand1 >= $params->operand2 ?
 				true :
 				false
 			;
@@ -112,7 +107,7 @@ if (isset($operand1)){
 		case '<=':
 		case 'mr':
 			$boolOut =
-				$operand1 <= $operand2 ?
+				$params->operand1 <= $params->operand2 ?
 				true :
 				false
 			;
@@ -120,7 +115,7 @@ if (isset($operand1)){
 		
 		case 'bool':
 			$boolOut =
-				$operand1 ?
+				$params->operand1 ?
 				true :
 				false
 			;
@@ -129,12 +124,12 @@ if (isset($operand1)){
 		case 'inarray':
 			$operand2Array = explode(
 				',',
-				$operand2
+				$params->operand2
 			);
 			
 			$boolOut =
 				in_array(
-					$operand1,
+					$params->operand1,
 					$operand2Array
 				) ?
 				true :
@@ -143,83 +138,66 @@ if (isset($operand1)){
 		break;
 		
 		case 'isnumeric':
-			$boolOut = is_numeric($operand1);
+			$boolOut = is_numeric($params->operand1);
 		break;
 		
 		case '==':
 		case 'r':
 		default:
 			$boolOut =
-				$operand1 == $operand2 ?
+				$params->operand1 == $params->operand2 ?
 				true :
 				false
 			;
 	}
 	
-	//Если есть дополнительные данные
-	if (isset($placeholders)){
-		//Разбиваем их
-		$placeholders = \ddTools::encodedStringToArray($placeholders);
-	}else{
-		$placeholders = [];
-	}
-	
-	//Backward compatibility
-	if (
-		isset($trueString) ||
-		isset($falseString)
-	){
-		\ddTools::logEvent([
-			'message' => '<p>The “trueString” and “falseString” parameters are deprecated. Please use instead “trueChunk” and “falseChunk” with the “@CODE:” prefix.</p>'
-		]);
-		
-		if (isset($trueString)){
-			$trueChunk =
-				'@CODE:' .
-				$trueString
-			;
-		}
-		
-		if (isset($falseString)){
-			$falseChunk =
-				'@CODE:' .
-				$falseString
-			;
-		}
-	}
-	
 	//Select output chunk
 	$resultChunk =
 		$boolOut ?
-		(
-			isset($trueChunk) ?
-			$trueChunk :
-			''
-		) :
-		(
-			isset($falseChunk) ?
-			$falseChunk :
-			''
-		)
+		$params->trueChunk :
+		$params->falseChunk
 	;
 	
 	//$modx->getTpl('@CODE:') returns '@CODE:' O_o
-	$resultChunk = $modx->getTpl(
-		$resultChunk != '@CODE:' ?
-		$resultChunk :
-		''
-	);
+	$resultChunk = 
+		$resultChunk == '@CODE:' ?
+		'' :
+		$modx->getTpl($resultChunk)
+	;
 	
 	$snippetResult = \ddTools::parseText([
 		'text' => $resultChunk,
 		'data' => array_merge(
 			[
-				'ddIf_operand1' => $operand1,
-				'ddIf_operand2' => $operand2,
-				'ddIf_operator' => $operator
+				'snippetParams.operand1' => $params->operand1,
+				'snippetParams.operand2' => $params->operand2,
+				'snippetParams.operator' => $params->operator
 			],
-			$placeholders
+			$params->placeholders
 		)
+	]);
+}
+
+//Если для отладки нужно вывести то что пришло в сниппет выводим
+if(!is_null($params->debugTitle)){
+	\ddTools::logEvent([
+		'message' =>
+			'<p>Snippet parameters:</p><pre><code>' .
+			var_export(
+				$params,
+				true
+			) .
+			'</code></pre>' .
+			'<p>Snippet result:</p><pre><code>' .
+			var_export(
+				$snippetResult,
+				true
+			) .
+			'</code></pre>'
+		,
+		'source' =>
+			'ddIf: ' .
+			$params->debugTitle
 	]);
 }
 
