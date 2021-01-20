@@ -34,11 +34,7 @@ $params = \DDTools\ObjectTools::extend([
 			'falseChunk' => '',
 			'placeholders' => [],
 			//Unset
-			'debugTitle' => NULL,
-			
-			//Outdated parameters for backward compatibility
-			'trueString' => NULL,
-			'falseString' => NULL
+			'debugTitle' => NULL
 		],
 		$params
 	]
@@ -153,30 +149,6 @@ if (!is_null($params->operand1)){
 				true :
 				false
 			;
-	}
-	
-	//Backward compatibility
-	if (
-		!is_null($params->trueString) ||
-		!is_null($params->falseString)
-	){
-		\ddTools::logEvent([
-			'message' => '<p>The “trueString” and “falseString” parameters are deprecated. Please use instead “trueChunk” and “falseChunk” with the “@CODE:” prefix.</p>'
-		]);
-		
-		if (!is_null($params->trueString)){
-			$params->trueChunk =
-				'@CODE:' .
-				$params->trueString
-			;
-		}
-		
-		if (!is_null($params->falseString)){
-			$params->falseChunk =
-				'@CODE:' .
-				$params->falseString
-			;
-		}
 	}
 	
 	//Select output chunk
