@@ -21,13 +21,31 @@ require_once(
 //The snippet must return an empty string even if result is absent
 $snippetResult = '';
 
-$params = \DDTools\ObjectTools::convertType([
-	'object' => $params,
-	'type' => 'objectStdClass'
+//Defaults
+$params = \DDTools\ObjectTools::extend([
+	'objects' => [
+		(object) [
+			//Required
+			'operand1' => NULL,
+			//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
+			'operand2' => '',
+			'operator' => '==',
+			'trueChunk' => '',
+			'falseChunk' => '',
+			'placeholders' => [],
+			//Unset
+			'debugTitle' => NULL,
+			
+			//Outdated parameters for backward compatibility
+			'trueString' => NULL,
+			'falseString' => NULL
+		],
+		$params
+	]
 ]);
 
 //Если передано, что сравнивать
-if (isset($params->operand1)){
+if (!is_null($params->operand1)){
 	//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
 	if(
 		mb_substr(
@@ -43,17 +61,10 @@ if (isset($params->operand1)){
 		$params->operand1 = '';
 	}
 	
-	//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
-	$params->operand2 =
-		isset($params->operand2) ?
-		$params->operand2 :
-		''
-	;
-	$params->operator =
-		isset($params->operator) ?
-		mb_strtolower($params->operator) :
-		'=='
-	;
+	$params->operator =	mb_strtolower($params->operator);
+	
+	//Разбиваем дополнительные данные
+	$params->placeholders = \ddTools::encodedStringToArray($params->placeholders);
 	
 	//Булевое значение истинности сравнения
 	$boolOut = '';
@@ -144,31 +155,23 @@ if (isset($params->operand1)){
 			;
 	}
 	
-	//Если есть дополнительные данные
-	if (isset($params->placeholders)){
-		//Разбиваем их
-		$params->placeholders = \ddTools::encodedStringToArray($params->placeholders);
-	}else{
-		$params->placeholders = [];
-	}
-	
 	//Backward compatibility
 	if (
-		isset($params->trueString) ||
-		isset($params->falseString)
+		!is_null($params->trueString) ||
+		!is_null($params->falseString)
 	){
 		\ddTools::logEvent([
 			'message' => '<p>The “trueString” and “falseString” parameters are deprecated. Please use instead “trueChunk” and “falseChunk” with the “@CODE:” prefix.</p>'
 		]);
 		
-		if (isset($params->trueString)){
+		if (!is_null($params->trueString)){
 			$params->trueChunk =
 				'@CODE:' .
 				$params->trueString
 			;
 		}
 		
-		if (isset($params->falseString)){
+		if (!is_null($params->falseString)){
 			$params->falseChunk =
 				'@CODE:' .
 				$params->falseString
@@ -179,16 +182,8 @@ if (isset($params->operand1)){
 	//Select output chunk
 	$resultChunk =
 		$boolOut ?
-		(
-			isset($params->trueChunk) ?
-			$params->trueChunk :
-			''
-		) :
-		(
-			isset($params->falseChunk) ?
-			$params->falseChunk :
-			''
-		)
+		$params->trueChunk :
+		$params->falseChunk
 	;
 	
 	//$modx->getTpl('@CODE:') returns '@CODE:' O_o
@@ -212,7 +207,7 @@ if (isset($params->operand1)){
 }
 
 //Если для отладки нужно вывести то что пришло в сниппет выводим
-if(isset($params->debugTitle)){
+if(!is_null($params->debugTitle)){
 	\ddTools::logEvent([
 		'message' =>
 			'<p>Snippet parameters:</p><pre><code>' .
