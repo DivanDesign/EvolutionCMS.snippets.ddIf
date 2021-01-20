@@ -210,18 +210,18 @@ if (isset($operand1)){
 if(isset($debugTitle)){
 	\ddTools::logEvent([
 		'message' =>
-			'<p>Snippet parameters:</p><code><pre>' .
+			'<p>Snippet parameters:</p><pre><code>' .
 			var_export(
 				$params,
 				true
 			) .
-			'</pre></code>' .
-			'<p>Snippet result:</p><code><pre>' .
+			'</code></pre>' .
+			'<p>Snippet result:</p><pre><code>' .
 			var_export(
 				$snippetResult,
 				true
 			) .
-			'</pre></code>'
+			'</code></pre>'
 		,
 		'source' =>
 			'ddIf: ' .
