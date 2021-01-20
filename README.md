@@ -206,6 +206,7 @@ Let `[*general_price*]` be equal to `120`, then the snippet returns:
 
 * [Home page](https://code.divandesign.biz/modx/ddif)
 * [Telegram chat](https://t.me/dd_code)
+* [Packagist](https://packagist.org/packages/dd/evolutioncms-snippets-ddif)
 
 
 <link rel="stylesheet" type="text/css" href="https://DivanDesign.ru/assets/files/ddMarkdown.css" />
