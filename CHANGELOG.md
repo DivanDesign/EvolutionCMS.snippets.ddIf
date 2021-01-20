@@ -1,6 +1,21 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Version 2.0 (2021-01-20)
+* \* Attention! Backward compatibility is broken.
+* \- Parameters → `trueString`, `falseString`: The deprecated parameters are no longer supported.
+* \* Parameters → `trueChunk`, `falseChunk`: The following available placeholders were renamed:
+	* \* `ddIf_operand1` → `snippetParams.operand1`.
+	* \* `ddIf_operand2` → `snippetParams.operand2`.
+	* \* `ddIf_operator` → `snippetParams.operator`.
+* \+ Snippet result was added to debug log message.
+* \+ Improved style of debug log message.
+* \* Refactoring:
+	* \* The `$params` variable is used instead of a standalone variable for each parameter.
+	* \* `\DDTools\ObjectTools::extend` is used to set parameters defaults.
+* \+ README → Links → Packagist.
+
+
 ## Version 1.7.1 (2020-10-08)
 * \* Parameters → `operand1`: Improved an empty unparsed placeholder recognition.
 
