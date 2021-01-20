@@ -159,11 +159,11 @@ if (!is_null($params->operand1)){
 	;
 	
 	//$modx->getTpl('@CODE:') returns '@CODE:' O_o
-	$resultChunk = $modx->getTpl(
-		$resultChunk != '@CODE:' ?
-		$resultChunk :
-		''
-	);
+	$resultChunk = 
+		$resultChunk == '@CODE:' ?
+		'' :
+		$modx->getTpl($resultChunk)
+	;
 	
 	$snippetResult = \ddTools::parseText([
 		'text' => $resultChunk,
