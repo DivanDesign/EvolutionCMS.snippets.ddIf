@@ -21,23 +21,6 @@ require_once(
 //The snippet must return an empty string even if result is absent
 $snippetResult = '';
 
-//Если для отладки нужно вывести то что пришло в сниппет выводим
-if(isset($debugTitle)){
-	\ddTools::logEvent([
-		'message' =>
-			'<p>Snippet parameters:</p><code><pre>' .
-			var_export(
-				$params,
-				true
-			) .
-			'</pre></code>'
-		,
-		'source' =>
-			'ddIf: ' .
-			$debugTitle
-	]);
-}
-
 //Если передано, что сравнивать
 if (isset($operand1)){
 	//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
@@ -220,6 +203,29 @@ if (isset($operand1)){
 			],
 			$placeholders
 		)
+	]);
+}
+
+//Если для отладки нужно вывести то что пришло в сниппет выводим
+if(isset($debugTitle)){
+	\ddTools::logEvent([
+		'message' =>
+			'<p>Snippet parameters:</p><code><pre>' .
+			var_export(
+				$params,
+				true
+			) .
+			'</pre></code>' .
+			'<p>Snippet result:</p><code><pre>' .
+			var_export(
+				$snippetResult,
+				true
+			) .
+			'</pre></code>'
+		,
+		'source' =>
+			'ddIf: ' .
+			$debugTitle
 	]);
 }
 
