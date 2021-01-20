@@ -54,9 +54,9 @@ Elements → Snippets: Create a new snippet with the following data:
 * `trueChunk`
 	* Desctription: This value is returning if result is true.
 		Available placeholders:
-		* `[+ddIf_operand1+]` — contains `operand1` value.
-		* `[+ddIf_operand2+]` — contains `operand2` value.
-		* `[+ddIf_operator+]` — contains `operator` value.
+		* `[+snippetParams.operand1+]` — contains `operand1` value.
+		* `[+snippetParams.operand2+]` — contains `operand2` value.
+		* `[+snippetParams.operator+]` — contains `operator` value.
 		* `[+`any placeholders from the `placeholders` parameter`+]`
 	* Valid values:
 		* `stringChunkName`
@@ -66,9 +66,9 @@ Elements → Snippets: Create a new snippet with the following data:
 * `falseChunk`
 	* Desctription: This value is returning if result is false. 
 		Available placeholders:
-		* `[+ddIf_operand1+]` — contains `operand1` value.
-		* `[+ddIf_operand2+]` — contains `operand2` value.
-		* `[+ddIf_operator+]` — contains `operator` value.
+		* `[+snippetParams.operand1+]` — contains `operand1` value.
+		* `[+snippetParams.operand2+]` — contains `operand2` value.
+		* `[+snippetParams.operator+]` — contains `operator` value.
 		* `[+`any placeholders from the `placeholders` parameter`+]`
 	* Valid values:
 		* `stringChunkName`
@@ -177,7 +177,7 @@ Code of the `general_good` chunk:
 
 ```html
 <div>
-	<h2>[+title+], $[+ddIf_operand1+]</h2>
+	<h2>[+title+], $[+snippetParams.operand1+]</h2>
 	<img src="[+image+]" alt="[+title+]" />
 </div>
 ```
@@ -186,7 +186,7 @@ Code of the `general_goodInexpensive` chunk:
 
 ```html
 <div class="inexpensive">
-	<h2>[+title+], <strong>$[+ddIf_operand1+]</strong></h2>
+	<h2>[+title+], <strong>$[+snippetParams.operand1+]</strong></h2>
 	<img src="[+image+]" alt="[+title+]" />
 	<p>[+somethingText+]</p>
 </div>

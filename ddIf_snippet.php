@@ -197,9 +197,9 @@ if (!is_null($params->operand1)){
 		'text' => $resultChunk,
 		'data' => array_merge(
 			[
-				'ddIf_operand1' => $params->operand1,
-				'ddIf_operand2' => $params->operand2,
-				'ddIf_operator' => $params->operator
+				'snippetParams.operand1' => $params->operand1,
+				'snippetParams.operand2' => $params->operand2,
+				'snippetParams.operator' => $params->operator
 			],
 			$params->placeholders
 		)
