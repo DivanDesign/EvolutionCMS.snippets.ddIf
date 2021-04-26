@@ -15,13 +15,20 @@ This snippet compares different values and returns required chunk or string.
 
 ### Installation
 
-Elements → Snippets: Create a new snippet with the following data:
+
+#### 1. Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddIf`.
 2. Description: `<b>2.0</b> This snippet compares different values and returns required chunk or string.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.
+
+
+#### 2. Elements → Manage Files
+
+1. Create a new folder `assets/snippets/ddIf/`.
+2. Extract the archive to the folder (except `ddIf_snippet.php`).
 
 
 ### Parameters description
@@ -200,6 +207,27 @@ Let `[*general_price*]` be equal to `120`, then the snippet returns:
 	<h2>Some inexpensive good, <strong>$120</strong></h2>
 	<img src="assets/images/goods/some1.jpg" alt="Some inexpensive good" />
 </div>
+```
+
+
+#### Run the snippet through `\DDTools\Snippet::runSnippet` without DB and eval
+
+```php
+//Include (MODX)EvolutionCMS.libraries.ddTools
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddTools/modx.ddtools.class.php'
+);
+
+//Run (MODX)EvolutionCMS.snippets.ddIf
+\DDTools\Snippet::runSnippet([
+	'name' => 'ddIf',
+	'params' => [
+		'operand1' => '1',
+		'operator' => 'bool',
+		'trueChunk' => '@CODE:It's true!'
+	]
+]);
 ```
 
 

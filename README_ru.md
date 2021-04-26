@@ -15,13 +15,20 @@
 
 ### Установка
 
-Элементы → Сниппеты: Создайте новый сниппет со следующими параметрами:
+
+#### 1. Элементы → Сниппеты: Создайте новый сниппет со следующими параметрами
 
 1. Название сниппета: `ddIf`.
 2. Описание: `<b>2.0</b> Сравнивает значения и выводит необходимый чанк или строку.`.
 3. Категория: `Core`.
 4. Анализировать DocBlock: `no`.
 5. Код сниппета (php): Вставьте содержимое файла `ddIf_snippet.php` из архива.
+
+
+#### 2. Элементы → Управление файлами
+
+1. Создайте новую папку `assets/snippets/ddIf/`.
+2. Извлеките содержимое архива в неё (кроме файла `ddIf_snippet.php`).
 
 
 ### Описание параметров
@@ -200,6 +207,27 @@
 	<h2>Один из недорогих товаров, <strong>$120</strong></h2>
 	<img src="assets/images/goods/some1.jpg" alt="Один из недорогих товаров" />
 </div>
+```
+
+
+#### Запустить сниппет через `\DDTools\Snippet::runSnippet` без DB и eval
+
+```php
+//Подключение (MODX)EvolutionCMS.libraries.ddTools
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddTools/modx.ddtools.class.php'
+);
+
+//Запуск (MODX)EvolutionCMS.snippets.ddIf
+\DDTools\Snippet::runSnippet([
+	'name' => 'ddIf',
+	'params' => [
+		'operand1' => '1',
+		'operator' => 'bool',
+		'trueChunk' => '@CODE:Это истина!'
+	]
+]);
 ```
 
 
