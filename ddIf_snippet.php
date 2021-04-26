@@ -43,7 +43,10 @@ $params = \DDTools\ObjectTools::extend([
 $params->operator =	mb_strtolower($params->operator);
 
 //Разбиваем дополнительные данные
-$params->placeholders = \ddTools::encodedStringToArray($params->placeholders);
+$params->placeholders = \DDTools\ObjectTools::convertType([
+	'object' => $params->placeholders,
+	'type' => 'objectArray'
+]);
 
 
 //# Run
