@@ -26,7 +26,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * prepareParams
-	 * @version 1.0 (2021-04-26)
+	 * @version 1.1 (2021-04-26)
 	 * 
 	 * @param $params {stdClass|arrayAssociative|stringJsonObject|stringQueryFormatted}
 	 * 
@@ -52,12 +52,29 @@ class Snippet extends \DDTools\Snippet {
 			$this->params->operand1 = '';
 		}
 		
-		$this->params->operator =	mb_strtolower($this->params->operator);
+		//Backward compatibility
+		$operatorBackwardCompliance = [
+			'r' => '==',
+			'!r' => '!=',
+			'b' => '>',
+			'm' => '<',
+			'br' => '>=',
+			'mr' => '<='
+		];
+		
+		if (
+			array_key_exists(
+				mb_strtolower($this->params->operator),
+				$operatorBackwardCompliance
+			)
+		){
+			$this->params->operator = $operatorBackwardCompliance[$this->params->operator];
+		}
 	}
 	
 	/**
 	 * run
-	 * @version 1.0 (2021-04-26)
+	 * @version 1.0.1 (2021-04-26)
 	 * 
 	 * @return {string}
 	 */
@@ -73,8 +90,6 @@ class Snippet extends \DDTools\Snippet {
 			//Выбираем сравнение в зависимости от оператора
 			switch ($this->params->operator){
 				case '!=':
-				//Backward compatibility
-				case '!r':
 					$boolOut =
 						$this->params->operand1 != $this->params->operand2 ?
 						true :
@@ -83,7 +98,6 @@ class Snippet extends \DDTools\Snippet {
 				break;
 				
 				case '>':
-				case 'b':
 					$boolOut =
 						$this->params->operand1 > $this->params->operand2 ?
 						true :
@@ -92,7 +106,6 @@ class Snippet extends \DDTools\Snippet {
 				break;
 				
 				case '<':
-				case 'm':
 					$boolOut =
 						$this->params->operand1 < $this->params->operand2 ?
 						true :
@@ -101,7 +114,6 @@ class Snippet extends \DDTools\Snippet {
 				break;
 				
 				case '>=':
-				case 'br':
 					$boolOut =
 						$this->params->operand1 >= $this->params->operand2 ?
 						true :
@@ -110,7 +122,6 @@ class Snippet extends \DDTools\Snippet {
 				break;
 				
 				case '<=':
-				case 'mr':
 					$boolOut =
 						$this->params->operand1 <= $this->params->operand2 ?
 						true :
@@ -147,7 +158,6 @@ class Snippet extends \DDTools\Snippet {
 				break;
 				
 				case '==':
-				case 'r':
 				default:
 					$boolOut =
 						$this->params->operand1 == $this->params->operand2 ?
