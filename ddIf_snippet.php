@@ -40,6 +40,22 @@ $params = \DDTools\ObjectTools::extend([
 	]
 ]);
 
+//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
+if (
+	is_string($params->operand1) &&
+	mb_substr(
+		$params->operand1,
+		0,
+		2
+	) == '[+' &&
+	mb_substr(
+		$params->operand1,
+		-2
+	) == '+]'
+){
+	$params->operand1 = '';
+}
+
 $params->operator =	mb_strtolower($params->operator);
 
 //Разбиваем дополнительные данные
@@ -55,21 +71,6 @@ $snippetResult = '';
 
 //Если передано, что сравнивать
 if (!is_null($params->operand1)){
-	//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
-	if(
-		mb_substr(
-			$params->operand1,
-			0,
-			2
-		) == '[+' &&
-		mb_substr(
-			$params->operand1,
-			-2
-		) == '+]'
-	){
-		$params->operand1 = '';
-	}
-	
 	//Булевое значение истинности сравнения
 	$boolOut = '';
 	
