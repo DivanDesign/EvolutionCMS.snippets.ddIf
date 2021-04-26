@@ -12,18 +12,18 @@
 
 global $modx;
 
+//# Include
 //Include (MODX)EvolutionCMS.libraries.ddTools
 require_once(
 	$modx->getConfig('base_path') .
 	'assets/libs/ddTools/modx.ddtools.class.php'
 );
 
-//The snippet must return an empty string even if result is absent
-$snippetResult = '';
 
-//Defaults
+//# Prepare params
 $params = \DDTools\ObjectTools::extend([
 	'objects' => [
+		//Defaults
 		(object) [
 			//Required
 			'operand1' => NULL,
@@ -39,6 +39,16 @@ $params = \DDTools\ObjectTools::extend([
 		$params
 	]
 ]);
+
+$params->operator =	mb_strtolower($params->operator);
+
+//Разбиваем дополнительные данные
+$params->placeholders = \ddTools::encodedStringToArray($params->placeholders);
+
+
+//# Run
+//The snippet must return an empty string even if result is absent
+$snippetResult = '';
 
 //Если передано, что сравнивать
 if (!is_null($params->operand1)){
@@ -56,11 +66,6 @@ if (!is_null($params->operand1)){
 	){
 		$params->operand1 = '';
 	}
-	
-	$params->operator =	mb_strtolower($params->operator);
-	
-	//Разбиваем дополнительные данные
-	$params->placeholders = \ddTools::encodedStringToArray($params->placeholders);
 	
 	//Булевое значение истинности сравнения
 	$boolOut = '';
