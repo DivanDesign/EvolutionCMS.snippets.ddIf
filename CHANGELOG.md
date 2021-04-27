@@ -1,6 +1,15 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Version 2.1 (2021-04-27)
+* \* Attention! PHP >= 5.6 is required.
+* \* Attention! (MODX)EvolutionCMS.libraries.ddTools >= 0.49.1 is required.
+* \+ Parameters → `placeholders`: Can also be set as [HJSON](https://hjson.github.io/).
+* \+ You can just call `\DDTools\Snippet::runSnippet` to run the snippet without DB and eval (see README → Examples).
+* \+ `\ddIf\Snippet`: The new class. All snippet code was moved here.
+* \+ Composer.json → `support`.
+
+
 ## Version 2.0 (2021-01-20)
 * \* Attention! Backward compatibility is broken.
 * \- Parameters → `trueString`, `falseString`: The deprecated parameters are no longer supported.

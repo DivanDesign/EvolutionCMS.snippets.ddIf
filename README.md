@@ -5,9 +5,9 @@ This snippet compares different values and returns required chunk or string.
 
 ## Requires
 
-* PHP >= 5.4
+* PHP >= 5.6
 * [(MODX)EvolutionCMS](https://github.com/evolution-cms/evolution) >= 1.1
-* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.40.1 (not tested with older versions)
+* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.49.1
 
 
 ## Documentation
@@ -15,13 +15,20 @@ This snippet compares different values and returns required chunk or string.
 
 ### Installation
 
-Elements → Snippets: Create a new snippet with the following data:
+
+#### 1. Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddIf`.
-2. Description: `<b>2.0</b> This snippet compares different values and returns required chunk or string.`.
+2. Description: `<b>2.1</b> This snippet compares different values and returns required chunk or string.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.
+
+
+#### 2. Elements → Manage Files
+
+1. Create a new folder `assets/snippets/ddIf/`.
+2. Extract the archive to the folder (except `ddIf_snippet.php`).
 
 
 ### Parameters description
@@ -84,8 +91,9 @@ Elements → Snippets: Create a new snippet with the following data:
 		* `{"some": ["one", "two"] }` => `[+some.0+]`, `[+some.1+]`.
 	* Valid values:
 		* `stringJsonObject` — as [JSON](https://en.wikipedia.org/wiki/JSON)
+		* `stringHjsonObject` — as [HJSON](https://hjson.github.io/)
 		* `stringQueryFormated` — as [Query string](https://en.wikipedia.org/wiki/Query_string)
-		* It can also be set as a PHP object or array (e. g. for calls through `$modx->runSnippet`).
+		* It can also be set as a native PHP object or array (e. g. for calls through `$modx->runSnippet`):
 			* `arrayAssociative`
 			* `object`
 	* Default value: —
@@ -199,6 +207,27 @@ Let `[*general_price*]` be equal to `120`, then the snippet returns:
 	<h2>Some inexpensive good, <strong>$120</strong></h2>
 	<img src="assets/images/goods/some1.jpg" alt="Some inexpensive good" />
 </div>
+```
+
+
+#### Run the snippet through `\DDTools\Snippet::runSnippet` without DB and eval
+
+```php
+//Include (MODX)EvolutionCMS.libraries.ddTools
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddTools/modx.ddtools.class.php'
+);
+
+//Run (MODX)EvolutionCMS.snippets.ddIf
+\DDTools\Snippet::runSnippet([
+	'name' => 'ddIf',
+	'params' => [
+		'operand1' => '1',
+		'operator' => 'bool',
+		'trueChunk' => '@CODE:It's true!'
+	]
+]);
 ```
 
 

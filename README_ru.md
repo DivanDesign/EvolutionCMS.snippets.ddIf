@@ -5,9 +5,9 @@
 
 ## Использует
 
-* PHP >= 5.4
+* PHP >= 5.6
 * [(MODX)EvolutionCMS](https://github.com/evolution-cms/evolution) >= 1.1
-* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.40.1 (не тестировался с более старыми версиями)
+* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.49.1
 
 
 ## Документация
@@ -15,13 +15,20 @@
 
 ### Установка
 
-Элементы → Сниппеты: Создайте новый сниппет со следующими параметрами:
+
+#### 1. Элементы → Сниппеты: Создайте новый сниппет со следующими параметрами
 
 1. Название сниппета: `ddIf`.
-2. Описание: `<b>2.0</b> Сравнивает значения и выводит необходимый чанк или строку.`.
+2. Описание: `<b>2.1</b> Сравнивает значения и выводит необходимый чанк или строку.`.
 3. Категория: `Core`.
 4. Анализировать DocBlock: `no`.
 5. Код сниппета (php): Вставьте содержимое файла `ddIf_snippet.php` из архива.
+
+
+#### 2. Элементы → Управление файлами
+
+1. Создайте новую папку `assets/snippets/ddIf/`.
+2. Извлеките содержимое архива в неё (кроме файла `ddIf_snippet.php`).
 
 
 ### Описание параметров
@@ -84,6 +91,7 @@
 		* `{"some": ["one", "two"] }` => `[+some.0+]`, `[+some.1+]`.
 	* Допустимые значения:
 		* `stringJsonObject` — в виде [JSON](https://ru.wikipedia.org/wiki/JSON)
+		* `stringHjsonObject` — в виде [HJSON](https://hjson.github.io/)
 		* `stringQueryFormated` — в виде [Query string](https://en.wikipedia.org/wiki/Query_string)
 		* Также может быть задан, как нативный PHP объект или массив (например, для вызовов через `$modx->runSnippet`).
 			* `arrayAssociative`
@@ -199,6 +207,27 @@
 	<h2>Один из недорогих товаров, <strong>$120</strong></h2>
 	<img src="assets/images/goods/some1.jpg" alt="Один из недорогих товаров" />
 </div>
+```
+
+
+#### Запустить сниппет через `\DDTools\Snippet::runSnippet` без DB и eval
+
+```php
+//Подключение (MODX)EvolutionCMS.libraries.ddTools
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddTools/modx.ddtools.class.php'
+);
+
+//Запуск (MODX)EvolutionCMS.snippets.ddIf
+\DDTools\Snippet::runSnippet([
+	'name' => 'ddIf',
+	'params' => [
+		'operand1' => '1',
+		'operator' => 'bool',
+		'trueChunk' => '@CODE:Это истина!'
+	]
+]);
 ```
 
 
