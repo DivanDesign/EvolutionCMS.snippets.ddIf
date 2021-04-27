@@ -16,7 +16,10 @@ This snippet compares different values and returns required chunk or string.
 ### Installation
 
 
-#### 1. Elements → Snippets: Create a new snippet with the following data
+#### Manually
+
+
+##### 1. Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddIf`.
 2. Description: `<b>2.1</b> This snippet compares different values and returns required chunk or string.`.
@@ -25,10 +28,32 @@ This snippet compares different values and returns required chunk or string.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.
 
 
-#### 2. Elements → Manage Files
+##### 2. Elements → Manage Files
 
 1. Create a new folder `assets/snippets/ddIf/`.
 2. Extract the archive to the folder (except `ddIf_snippet.php`).
+
+
+#### Using [(MODX)EvolutionCMS.libraries.ddInstaller](https://github.com/DivanDesign/EvolutionCMS.libraries.ddInstaller)
+
+Just run the following PHP code in your sources or [Console](https://github.com/vanchelo/MODX-Evolution-Ajax-Console):
+
+```php
+//Include (MODX)EvolutionCMS.libraries.ddInstaller
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddInstaller/require.php'
+);
+
+//Install (MODX)EvolutionCMS.snippets.ddIf
+\DDInstaller::install([
+	'url' => 'https://github.com/DivanDesign/EvolutionCMS.snippets.ddIf',
+	'type' => 'snippet'
+]);
+```
+
+* If `ddIf` is not exist on your site, `ddInstaller` will just install it.
+* If `ddIf` is already exist on your site, `ddInstaller` will check it version and update it if needed.
 
 
 ### Parameters description
