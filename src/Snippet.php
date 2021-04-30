@@ -76,7 +76,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.0.1 (2021-04-26)
+	 * @version 1.1 (2021-04-30)
 	 * 
 	 * @return {string}
 	 */
@@ -157,6 +157,13 @@ class Snippet extends \DDTools\Snippet {
 				
 				case 'isnumeric':
 					$boolOut = is_numeric($this->params->operand1);
+				break;
+				
+				case 'iswhitespace':
+					$boolOut =
+						$this->params->operand1 == '' ||
+						ctype_space($this->params->operand1)
+					;
 				break;
 				
 				case '==':

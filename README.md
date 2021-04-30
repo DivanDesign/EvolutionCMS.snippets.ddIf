@@ -82,6 +82,7 @@ require_once(
 		* `'bool'`
 		* `'inArray'`
 		* `'isNumeric'`
+		* `'isWhitespace'` — checks if `operand1` is just white space (an empty string is also considered as white space)
 	* Default value: `'=='`
 	
 * `trueChunk`
@@ -187,6 +188,48 @@ Returns:
 
 ```
 Number.
+```
+
+
+#### Checks if a `operand1` value is just white space or not
+
+Any number of spaces / tabs / new lines / etc are considered as white space.
+An empty string is also considered as white space.
+
+```
+[[ddIf?
+	&operand1=`
+		 
+	   
+	    
+	`
+	&operator=`isWhitespace`
+	&trueChunk=`@CODE:The string contains only some whitespace characters.`
+	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+]]
+```
+
+Returns:
+
+```
+The string contains only some whitespace characters.
+```
+
+If `operand1` contains any non-whitespace characters, `falseString` will be returned.
+
+```
+[[ddIf?
+	&operand1=`All you need is love.`
+	&operator=`isWhitespace`
+	&trueChunk=`@CODE:The string contains only some whitespace characters.`
+	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+]]
+```
+
+Returns:
+
+```
+All you need is love.
 ```
 
 
