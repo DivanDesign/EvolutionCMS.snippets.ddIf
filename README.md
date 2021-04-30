@@ -70,7 +70,8 @@ require_once(
 	* Default value: `''`
 	
 * `operator`
-	* Desctription: Comparing operator.
+	* Desctription: Comparing operator.  
+		Values are case insensitive (the following names are equal: `'isNumeric'`, `'isnumeric'`, `'ISNUMERIC'`, etc).
 	* Valid values:
 		* `'=='`
 		* `'!='`
@@ -79,8 +80,8 @@ require_once(
 		* `'<='`
 		* `'>='`
 		* `'bool'`
-		* `'inarray'`
-		* `'isnumeric'`
+		* `'inArray'`
+		* `'isNumeric'`
 	* Default value: `'=='`
 	
 * `trueChunk`
@@ -157,7 +158,7 @@ The strings are not equal.
 ```
 [[ddIf?
 	&operand1=`Apple`
-	&operator=`inarray`
+	&operator=`inArray`
 	&operand2=`Pear,Banana,Apple,Orange`
 	&trueChunk=`@CODE:Exists.`
 	&falseChunk=`@CODE:Not exists.`
@@ -176,7 +177,7 @@ Exists.
 ```
 [[ddIf?
 	&operand1=`123`
-	&operator=`isnumeric`
+	&operator=`isNumeric`
 	&trueChunk=`@CODE:Number.`
 	&falseChunk=`@CODE:Not number.`
 ]]

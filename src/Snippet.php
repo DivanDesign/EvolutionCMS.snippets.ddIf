@@ -26,7 +26,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * prepareParams
-	 * @version 1.1 (2021-04-26)
+	 * @version 1.2 (2021-04-30)
 	 * 
 	 * @param $params {stdClass|arrayAssociative|stringJsonObject|stringQueryFormatted}
 	 * 
@@ -52,6 +52,8 @@ class Snippet extends \DDTools\Snippet {
 			$this->params->operand1 = '';
 		}
 		
+		$this->params->operator = mb_strtolower($this->params->operator);
+		
 		//Backward compatibility
 		$operatorBackwardCompliance = [
 			'r' => '==',
@@ -64,7 +66,7 @@ class Snippet extends \DDTools\Snippet {
 		
 		if (
 			array_key_exists(
-				mb_strtolower($this->params->operator),
+				$this->params->operator,
 				$operatorBackwardCompliance
 			)
 		){

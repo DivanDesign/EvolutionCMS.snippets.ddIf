@@ -70,7 +70,8 @@ require_once(
 	* Значение по умолчанию: `''`
 	
 * `operator`
-	* Описание: Оператор сравнения.
+	* Описание: Оператор сравнения.  
+		Значения регистронезависимы (следующие значения равны: `'isNumeric'`, `'isnumeric'`, `'ISNUMERIC'` и т. п.).
 	* Допустимые значения:
 		* `'=='`
 		* `'!='`
@@ -79,8 +80,8 @@ require_once(
 		* `'<='`
 		* `'>='`
 		* `'bool'`
-		* `'inarray'`
-		* `'isnumeric'`
+		* `'inArray'`
+		* `'isNumeric'`
 	* Значение по умолчанию: `'=='`
 	
 * `trueChunk`
@@ -157,7 +158,7 @@ require_once(
 ```
 [[ddIf?
 	&operand1=`Яблоки`
-	&operator=`inarray`
+	&operator=`inArray`
 	&operand2=`Груши,Бананы,Яблоки,Апельсины`
 	&trueChunk=`@CODE:Присутствует.`
 	&falseChunk=`@CODE:Отсутствует.`
@@ -176,7 +177,7 @@ require_once(
 ```
 [[ddIf?
 	&operand1=`123`
-	&operator=`isnumeric`
+	&operator=`isNumeric`
 	&trueChunk=`@CODE:Число.`
 	&falseChunk=`@CODE:Не число.`
 ]]
