@@ -1,6 +1,13 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Версия 2.2 (2021-04-30)
+* \+ Параметры → `operator`:
+	* \+ Добавлена возможность проверить, что строка `operand1` содержит только пробельные символы (см. README).
+	* \+ Значения регистронезависимы.
+* \+ README → Документация → Установка → Используя (MODX)EvolutionCMS.libraries.ddInstaller.
+
+
 ## Версия 2.1 (2021-04-27)
 * \* Внимание! Требуется PHP >= 5.6.
 * \* Внимание! Требуется (MODX)EvolutionCMS.libraries.ddTools >= 0.49.1.

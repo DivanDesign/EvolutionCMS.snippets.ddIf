@@ -3,7 +3,7 @@ namespace ddIf;
 
 class Snippet extends \DDTools\Snippet {
 	protected
-		$version = '2.1.0',
+		$version = '2.2.0',
 		
 		$params = [
 			//Defaults
@@ -26,7 +26,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * prepareParams
-	 * @version 1.1 (2021-04-26)
+	 * @version 1.2 (2021-04-30)
 	 * 
 	 * @param $params {stdClass|arrayAssociative|stringJsonObject|stringQueryFormatted}
 	 * 
@@ -52,6 +52,8 @@ class Snippet extends \DDTools\Snippet {
 			$this->params->operand1 = '';
 		}
 		
+		$this->params->operator = mb_strtolower($this->params->operator);
+		
 		//Backward compatibility
 		$operatorBackwardCompliance = [
 			'r' => '==',
@@ -64,7 +66,7 @@ class Snippet extends \DDTools\Snippet {
 		
 		if (
 			array_key_exists(
-				mb_strtolower($this->params->operator),
+				$this->params->operator,
 				$operatorBackwardCompliance
 			)
 		){
@@ -74,7 +76,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.0.1 (2021-04-26)
+	 * @version 1.1 (2021-04-30)
 	 * 
 	 * @return {string}
 	 */
@@ -155,6 +157,13 @@ class Snippet extends \DDTools\Snippet {
 				
 				case 'isnumeric':
 					$boolOut = is_numeric($this->params->operand1);
+				break;
+				
+				case 'iswhitespace':
+					$boolOut =
+						$this->params->operand1 == '' ||
+						ctype_space($this->params->operand1)
+					;
 				break;
 				
 				case '==':

@@ -1,6 +1,13 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Version 2.2 (2021-04-30)
+* \+ Parameters → `operator`:
+	* \+ Added the ability to check if `operand1` is just white space (see README).
+	* \+ Values are case insensitive.
+* \+ README → Documentation → Installation → Using (MODX)EvolutionCMS.libraries.ddInstaller.
+
+
 ## Version 2.1 (2021-04-27)
 * \* Attention! PHP >= 5.6 is required.
 * \* Attention! (MODX)EvolutionCMS.libraries.ddTools >= 0.49.1 is required.

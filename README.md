@@ -16,19 +16,44 @@ This snippet compares different values and returns required chunk or string.
 ### Installation
 
 
-#### 1. Elements → Snippets: Create a new snippet with the following data
+#### Manually
+
+
+##### 1. Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddIf`.
-2. Description: `<b>2.1</b> This snippet compares different values and returns required chunk or string.`.
+2. Description: `<b>2.2</b> This snippet compares different values and returns required chunk or string.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.
 
 
-#### 2. Elements → Manage Files
+##### 2. Elements → Manage Files
 
 1. Create a new folder `assets/snippets/ddIf/`.
 2. Extract the archive to the folder (except `ddIf_snippet.php`).
+
+
+#### Using [(MODX)EvolutionCMS.libraries.ddInstaller](https://github.com/DivanDesign/EvolutionCMS.libraries.ddInstaller)
+
+Just run the following PHP code in your sources or [Console](https://github.com/vanchelo/MODX-Evolution-Ajax-Console):
+
+```php
+//Include (MODX)EvolutionCMS.libraries.ddInstaller
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddInstaller/require.php'
+);
+
+//Install (MODX)EvolutionCMS.snippets.ddIf
+\DDInstaller::install([
+	'url' => 'https://github.com/DivanDesign/EvolutionCMS.snippets.ddIf',
+	'type' => 'snippet'
+]);
+```
+
+* If `ddIf` is not exist on your site, `ddInstaller` will just install it.
+* If `ddIf` is already exist on your site, `ddInstaller` will check it version and update it if needed.
 
 
 ### Parameters description
@@ -45,7 +70,8 @@ This snippet compares different values and returns required chunk or string.
 	* Default value: `''`
 	
 * `operator`
-	* Desctription: Comparing operator.
+	* Desctription: Comparing operator.  
+		Values are case insensitive (the following names are equal: `'isNumeric'`, `'isnumeric'`, `'ISNUMERIC'`, etc).
 	* Valid values:
 		* `'=='`
 		* `'!='`
@@ -54,8 +80,9 @@ This snippet compares different values and returns required chunk or string.
 		* `'<='`
 		* `'>='`
 		* `'bool'`
-		* `'inarray'`
-		* `'isnumeric'`
+		* `'inArray'`
+		* `'isNumeric'`
+		* `'isWhitespace'` — checks if `operand1` is just white space (an empty string is also considered as white space)
 	* Default value: `'=='`
 	
 * `trueChunk`
@@ -132,7 +159,7 @@ The strings are not equal.
 ```
 [[ddIf?
 	&operand1=`Apple`
-	&operator=`inarray`
+	&operator=`inArray`
 	&operand2=`Pear,Banana,Apple,Orange`
 	&trueChunk=`@CODE:Exists.`
 	&falseChunk=`@CODE:Not exists.`
@@ -151,7 +178,7 @@ Exists.
 ```
 [[ddIf?
 	&operand1=`123`
-	&operator=`isnumeric`
+	&operator=`isNumeric`
 	&trueChunk=`@CODE:Number.`
 	&falseChunk=`@CODE:Not number.`
 ]]
@@ -161,6 +188,48 @@ Returns:
 
 ```
 Number.
+```
+
+
+#### Checks if a `operand1` value is just white space or not
+
+Any number of spaces / tabs / new lines / etc are considered as white space.
+An empty string is also considered as white space.
+
+```
+[[ddIf?
+	&operand1=`
+		 
+	   
+	    
+	`
+	&operator=`isWhitespace`
+	&trueChunk=`@CODE:The string contains only some whitespace characters.`
+	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+]]
+```
+
+Returns:
+
+```
+The string contains only some whitespace characters.
+```
+
+If `operand1` contains any non-whitespace characters, `falseString` will be returned.
+
+```
+[[ddIf?
+	&operand1=`All you need is love.`
+	&operator=`isWhitespace`
+	&trueChunk=`@CODE:The string contains only some whitespace characters.`
+	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+]]
+```
+
+Returns:
+
+```
+All you need is love.
 ```
 
 

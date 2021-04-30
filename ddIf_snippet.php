@@ -1,7 +1,7 @@
 <?php
 /**
  * ddIf
- * @version 2.1 (2021-04-27)
+ * @version 2.2 (2021-04-30)
  * 
  * @see README.md
  * 

@@ -16,19 +16,44 @@
 ### Установка
 
 
-#### 1. Элементы → Сниппеты: Создайте новый сниппет со следующими параметрами
+#### Вручную
+
+
+##### 1. Элементы → Сниппеты: Создайте новый сниппет со следующими параметрами
 
 1. Название сниппета: `ddIf`.
-2. Описание: `<b>2.1</b> Сравнивает значения и выводит необходимый чанк или строку.`.
+2. Описание: `<b>2.2</b> Сравнивает значения и выводит необходимый чанк или строку.`.
 3. Категория: `Core`.
 4. Анализировать DocBlock: `no`.
 5. Код сниппета (php): Вставьте содержимое файла `ddIf_snippet.php` из архива.
 
 
-#### 2. Элементы → Управление файлами
+##### 2. Элементы → Управление файлами
 
 1. Создайте новую папку `assets/snippets/ddIf/`.
 2. Извлеките содержимое архива в неё (кроме файла `ddIf_snippet.php`).
+
+
+#### Используя [(MODX)EvolutionCMS.libraries.ddInstaller](https://github.com/DivanDesign/EvolutionCMS.libraries.ddInstaller)
+
+Просто вызовите следующий код в своих исходинках или модуле [Console](https://github.com/vanchelo/MODX-Evolution-Ajax-Console):
+
+```php
+//Подключение (MODX)EvolutionCMS.libraries.ddInstaller
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddInstaller/require.php'
+);
+
+//Установка (MODX)EvolutionCMS.snippets.ddIf
+\DDInstaller::install([
+	'url' => 'https://github.com/DivanDesign/EvolutionCMS.snippets.ddIf',
+	'type' => 'snippet'
+]);
+```
+
+* Если `ddIf` отсутствует на вашем сайте, `ddInstaller` просто установит его.
+* Если `ddIf` уже есть на вашем сайте, `ddInstaller` проверит его версию и обновит, если нужно. 
 
 
 ### Описание параметров
@@ -45,7 +70,8 @@
 	* Значение по умолчанию: `''`
 	
 * `operator`
-	* Описание: Оператор сравнения.
+	* Описание: Оператор сравнения.  
+		Значения регистронезависимы (следующие значения равны: `'isNumeric'`, `'isnumeric'`, `'ISNUMERIC'` и т. п.).
 	* Допустимые значения:
 		* `'=='`
 		* `'!='`
@@ -54,8 +80,9 @@
 		* `'<='`
 		* `'>='`
 		* `'bool'`
-		* `'inarray'`
-		* `'isnumeric'`
+		* `'inArray'`
+		* `'isNumeric'`
+		* `'isWhitespace'` — проверяет, что строка `operand1` содержит только пробельные символы (пустая строка также считается пробельным символом)
 	* Значение по умолчанию: `'=='`
 	
 * `trueChunk`
@@ -132,7 +159,7 @@
 ```
 [[ddIf?
 	&operand1=`Яблоки`
-	&operator=`inarray`
+	&operator=`inArray`
 	&operand2=`Груши,Бананы,Яблоки,Апельсины`
 	&trueChunk=`@CODE:Присутствует.`
 	&falseChunk=`@CODE:Отсутствует.`
@@ -151,7 +178,7 @@
 ```
 [[ddIf?
 	&operand1=`123`
-	&operator=`isnumeric`
+	&operator=`isNumeric`
 	&trueChunk=`@CODE:Число.`
 	&falseChunk=`@CODE:Не число.`
 ]]
@@ -161,6 +188,48 @@
 
 ```
 Число.
+```
+
+
+#### Содержит ли `operand1` что-то, кроме пробельных символов
+
+Любое количество пробелов / табуляторов / новых строк / etc трактуются пробельными.
+Пустая строка также считается пробельным символом.
+
+```
+[[ddIf?
+	&operand1=`
+		 
+	   
+	    
+	`
+	&operator=`isWhitespace`
+	&trueChunk=`@CODE:Строка содержит только пробельные символы.`
+	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+]]
+```
+
+Вернёт:
+
+```
+Строка содержит только пробельные символы.
+```
+
+Если `operand1` содержит какие-либо непробельные символы, сниппет вернёт `falseString`.
+
+```
+[[ddIf?
+	&operand1=`All you need is love.`
+	&operator=`isWhitespace`
+	&trueChunk=`@CODE:Строка содержит только пробельные символы.`
+	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+]]
+```
+
+Вернёт:
+
+```
+All you need is love.
 ```
 
 
