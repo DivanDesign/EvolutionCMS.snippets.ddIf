@@ -76,7 +76,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.1 (2021-04-30)
+	 * @version 1.1.1 (2023-05-14)
 	 * 
 	 * @return {string}
 	 */
@@ -182,12 +182,7 @@ class Snippet extends \DDTools\Snippet {
 				$this->params->falseChunk
 			;
 			
-			//$modx->getTpl('@CODE:') returns '@CODE:' O_o
-			$resultChunk =
-				$resultChunk == '@CODE:' ?
-				'' :
-				\ddTools::$modx->getTpl($resultChunk)
-			;
+			$resultChunk = \ddTools::getTpl($resultChunk);
 			
 			$result = \ddTools::parseText([
 				'text' => $resultChunk,
