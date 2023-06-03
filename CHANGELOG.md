@@ -1,6 +1,14 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Version 2.3.1 (2023-06-03)
+* \* Compatibility with PHP < 8.
+* \* Parameters → `trueChunk`, `falseChunk` → Placeholders: The following have been renamed (outdated names are still supported, but are not recommended):
+	* \* `[+snippetParams.operand1+]` → `[+ddIfParams.operand1+]`.
+	* \* `[+snippetParams.operand2+]` → `[+ddIfParams.operand2+]`.
+	* \* `[+snippetParams.operator+]` → `[+ddIfParams.operator+]`.
+
+
 ## Version 2.3 (2023-06-03)
 * \+ Parameters → `operator` → Valid values → `'isIncludes'`: The new valid value. Case-sensitive check if `operand1` contains `operand2` (see README → Examples).
 * \* `\ddTools::getTpl` is used instead of `$modx->getTpl` (means a bit less bugs).

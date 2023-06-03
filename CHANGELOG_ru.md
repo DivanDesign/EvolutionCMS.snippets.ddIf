@@ -1,6 +1,14 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Версия 2.3.1 (2023-06-03)
+* \* Совместимость с PHP < 8.
+* \* Параметры → `trueChunk`, `falseChunk` → Плейсхолдеры: Следующие были переименованы (старые названия все ещё поддерживаются, но не рекомендуются):
+	* \* `[+snippetParams.operand1+]` → `[+ddIfParams.operand1+]`.
+	* \* `[+snippetParams.operand2+]` → `[+ddIfParams.operand2+]`.
+	* \* `[+snippetParams.operator+]` → `[+ddIfParams.operator+]`.
+
+
 ## Версия 2.3 (2023-06-03)
 * \+ Параметры → `operator` → Допустимые значения → `'isIncludes'`: Новое значение. Проверяет, содержит ли `operand1` в себе `operand2` с учётом регистра, (см. README → Примеры).
 * \* `\ddTools::getTpl` используется вместо `$modx->getTpl` (стало чуть меньше багов).
