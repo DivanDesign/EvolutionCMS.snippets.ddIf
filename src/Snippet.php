@@ -3,7 +3,7 @@ namespace ddIf;
 
 class Snippet extends \DDTools\Snippet {
 	protected
-		$version = '2.3.0',
+		$version = '2.3.1',
 		
 		$params = [
 			//Defaults
@@ -76,7 +76,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.2 (2023-06-03)
+	 * @version 1.2.3 (2023-06-03)
 	 * 
 	 * @return {string}
 	 */
@@ -92,58 +92,46 @@ class Snippet extends \DDTools\Snippet {
 			//Выбираем сравнение в зависимости от оператора
 			switch ($this->params->operator){
 				case '!=':
-					$boolOut =
-						$this->params->operand1 != $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 != $this->params->operand2;
 				break;
 				
 				case '>':
-					$boolOut =
-						$this->params->operand1 > $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 > $this->params->operand2;
 				break;
 				
 				case '<':
-					$boolOut =
-						$this->params->operand1 < $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 < $this->params->operand2;
 				break;
 				
 				case '>=':
-					$boolOut =
-						$this->params->operand1 >= $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 >= $this->params->operand2;
 				break;
 				
 				case '<=':
-					$boolOut =
-						$this->params->operand1 <= $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 <= $this->params->operand2;
 				break;
 				
 				case 'bool':
-					$boolOut =
-						$this->params->operand1 ?
-						true :
-						false
-					;
+					$boolOut = boolval($this->params->operand1);
 				break;
 				
 				case 'isincludes':
-					$boolOut = str_contains(
-						$this->params->operand1,
-						$this->params->operand2
-					);
+					$boolOut =
+						function_exists('str_contains') ?
+						//PHP >= 8
+						str_contains(
+							$this->params->operand1,
+							$this->params->operand2
+						) :
+						//PHP < 8
+						(
+							$this->params->operand2 === '' ||
+							mb_strpos(
+								$this->params->operand1,
+								$this->params->operand2
+							) !== false
+						)
+					;
 				break;
 				
 				case 'inarray':
@@ -152,14 +140,10 @@ class Snippet extends \DDTools\Snippet {
 						$this->params->operand2
 					);
 					
-					$boolOut =
-						in_array(
-							$this->params->operand1,
-							$operand2Array
-						) ?
-						true :
-						false
-					;
+					$boolOut = in_array(
+						$this->params->operand1,
+						$operand2Array
+					);
 				break;
 				
 				case 'isnumeric':
@@ -175,11 +159,7 @@ class Snippet extends \DDTools\Snippet {
 				
 				case '==':
 				default:
-					$boolOut =
-						$this->params->operand1 == $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 == $this->params->operand2;
 			}
 			
 			//Select output chunk
@@ -196,9 +176,13 @@ class Snippet extends \DDTools\Snippet {
 				'data' => \DDTools\ObjectTools::extend([
 					'objects' => [
 						[
+							'ddIfParams.operand1' => $this->params->operand1,
+							'ddIfParams.operand2' => $this->params->operand2,
+							'ddIfParams.operator' => $this->params->operator,
+							//Backward compatibility
 							'snippetParams.operand1' => $this->params->operand1,
 							'snippetParams.operand2' => $this->params->operand2,
-							'snippetParams.operator' => $this->params->operator
+							'snippetParams.operator' => $this->params->operator,
 						],
 						$this->params->placeholders
 					]

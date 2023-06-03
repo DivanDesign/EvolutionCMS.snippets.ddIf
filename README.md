@@ -41,7 +41,7 @@ require_once(
 #### 1. Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddIf`.
-2. Description: `<b>2.3</b> This snippet compares different values and returns required chunk or string.`.
+2. Description: `<b>2.3.1</b> This snippet compares different values and returns required chunk or string.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.
@@ -86,9 +86,9 @@ require_once(
 * `trueChunk`
 	* Desctription: This value is returning if result is true.
 		Available placeholders:
-		* `[+snippetParams.operand1+]` — contains `operand1` value.
-		* `[+snippetParams.operand2+]` — contains `operand2` value.
-		* `[+snippetParams.operator+]` — contains `operator` value.
+		* `[+ddIfParams.operand1+]` — contains `operand1` value.
+		* `[+ddIfParams.operand2+]` — contains `operand2` value.
+		* `[+ddIfParams.operator+]` — contains `operator` value.
 		* `[+`any placeholders from the `placeholders` parameter`+]`
 	* Valid values:
 		* `stringChunkName`
@@ -98,9 +98,9 @@ require_once(
 * `falseChunk`
 	* Desctription: This value is returning if result is false. 
 		Available placeholders:
-		* `[+snippetParams.operand1+]` — contains `operand1` value.
-		* `[+snippetParams.operand2+]` — contains `operand2` value.
-		* `[+snippetParams.operator+]` — contains `operator` value.
+		* `[+ddIfParams.operand1+]` — contains `operand1` value.
+		* `[+ddIfParams.operand2+]` — contains `operand2` value.
+		* `[+ddIfParams.operator+]` — contains `operator` value.
 		* `[+`any placeholders from the `placeholders` parameter`+]`
 	* Valid values:
 		* `stringChunkName`
@@ -222,7 +222,7 @@ An empty string is also considered as white space.
 	`
 	&operator=`isWhitespace`
 	&trueChunk=`@CODE:The string contains only some whitespace characters.`
-	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+	&falseChunk=`@CODE:[+ddIfParams.operand1+]`
 ]]
 ```
 
@@ -239,7 +239,7 @@ If `operand1` contains any non-whitespace characters, `falseString` will be retu
 	&operand1=`All you need is love.`
 	&operator=`isWhitespace`
 	&trueChunk=`@CODE:The string contains only some whitespace characters.`
-	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+	&falseChunk=`@CODE:[+ddIfParams.operand1+]`
 ]]
 ```
 
@@ -271,7 +271,7 @@ Code of the `general_good` chunk:
 
 ```html
 <div>
-	<h2>[+title+], $[+snippetParams.operand1+]</h2>
+	<h2>[+title+], $[+ddIfParams.operand1+]</h2>
 	<img src="[+image+]" alt="[+title+]" />
 </div>
 ```
@@ -280,7 +280,7 @@ Code of the `general_goodInexpensive` chunk:
 
 ```html
 <div class="inexpensive">
-	<h2>[+title+], <strong>$[+snippetParams.operand1+]</strong></h2>
+	<h2>[+title+], <strong>$[+ddIfParams.operand1+]</strong></h2>
 	<img src="[+image+]" alt="[+title+]" />
 	<p>[+somethingText+]</p>
 </div>
