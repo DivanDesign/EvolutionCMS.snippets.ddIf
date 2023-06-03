@@ -41,7 +41,7 @@ require_once(
 #### 1. Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddIf`.
-2. Description: `<b>2.2</b> This snippet compares different values and returns required chunk or string.`.
+2. Description: `<b>2.3</b> This snippet compares different values and returns required chunk or string.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.

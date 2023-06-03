@@ -1,13 +1,13 @@
 <?php
 /**
  * ddIf
- * @version 2.2 (2021-04-30)
+ * @version 2.3 (2023-06-03)
  * 
  * @see README.md
  * 
  * @link https://code.divandesign.ru/modx/ddif
  * 
- * @copyright 2012–2021 Ronef {@link https://Ronef.ru }
+ * @copyright 2012–2023 Ronef {@link https://Ronef.ru }
  */
 
 //Include (MODX)EvolutionCMS.libraries.ddTools
