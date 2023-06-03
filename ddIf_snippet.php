@@ -5,9 +5,9 @@
  * 
  * @see README.md
  * 
- * @link https://code.divandesign.biz/modx/ddif
+ * @link https://code.divandesign.ru/modx/ddif
  * 
- * @copyright 2012–2021 DD Group {@link https://DivanDesign.biz }
+ * @copyright 2012–2021 Ronef {@link https://Ronef.ru }
  */
 
 //Include (MODX)EvolutionCMS.libraries.ddTools

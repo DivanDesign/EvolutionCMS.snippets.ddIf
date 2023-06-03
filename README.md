@@ -7,7 +7,7 @@ This snippet compares different values and returns required chunk or string.
 
 * PHP >= 5.6
 * [(MODX)EvolutionCMS](https://github.com/evolution-cms/evolution) >= 1.1
-* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.60
+* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.ru/modx/ddtools) >= 0.60
 
 
 ## Installation
@@ -319,7 +319,7 @@ require_once(
 
 ## Links
 
-* [Home page](https://code.divandesign.biz/modx/ddif)
+* [Home page](https://code.divandesign.ru/modx/ddif)
 * [Telegram chat](https://t.me/dd_code)
 * [Packagist](https://packagist.org/packages/dd/evolutioncms-snippets-ddif)
 * [GitHub](https://github.com/DivanDesign/EvolutionCMS.snippets.ddIf)
