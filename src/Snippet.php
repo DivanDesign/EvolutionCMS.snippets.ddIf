@@ -76,7 +76,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.2 (2023-06-03)
+	 * @version 1.2.1 (2023-06-03)
 	 * 
 	 * @return {string}
 	 */
@@ -140,10 +140,22 @@ class Snippet extends \DDTools\Snippet {
 				break;
 				
 				case 'isincludes':
-					$boolOut = str_contains(
-						$this->params->operand1,
-						$this->params->operand2
-					);
+					$boolOut =
+						function_exists('str_contains') ?
+						//PHP >= 8
+						str_contains(
+							$this->params->operand1,
+							$this->params->operand2
+						) :
+						//PHP < 8
+						(
+							$this->params->operand2 === '' ||
+							mb_strpos(
+								$this->params->operand1,
+								$this->params->operand2
+							) !== false
+						)
+					;
 				break;
 				
 				case 'inarray':
