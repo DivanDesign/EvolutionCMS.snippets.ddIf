@@ -10,16 +10,13 @@ This snippet compares different values and returns required chunk or string.
 * [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.60
 
 
-## Documentation
+## Installation
 
 
-### Installation
+### Manually
 
 
-#### Manually
-
-
-##### 1. Elements → Snippets: Create a new snippet with the following data
+#### 1. Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddIf`.
 2. Description: `<b>2.2</b> This snippet compares different values and returns required chunk or string.`.
@@ -28,13 +25,13 @@ This snippet compares different values and returns required chunk or string.
 5. Snippet code (php): Insert content of the `ddIf_snippet.php` file from the archive.
 
 
-##### 2. Elements → Manage Files
+#### 2. Elements → Manage Files
 
 1. Create a new folder `assets/snippets/ddIf/`.
 2. Extract the archive to the folder (except `ddIf_snippet.php`).
 
 
-#### Using [(MODX)EvolutionCMS.libraries.ddInstaller](https://github.com/DivanDesign/EvolutionCMS.libraries.ddInstaller)
+### Using [(MODX)EvolutionCMS.libraries.ddInstaller](https://github.com/DivanDesign/EvolutionCMS.libraries.ddInstaller)
 
 Just run the following PHP code in your sources or [Console](https://github.com/vanchelo/MODX-Evolution-Ajax-Console):
 
@@ -56,7 +53,7 @@ require_once(
 * If `ddIf` is already exist on your site, `ddInstaller` will check it version and update it if needed.
 
 
-### Parameters description
+## Parameters description
 
 * `operand1`
 	* Desctription: The first operand for comparing.  
@@ -133,10 +130,10 @@ require_once(
 	* Default value: —
 
 
-### Examples
+## Examples
 
 
-#### String comparison
+### String comparison
 
 ```
 [[ddIf?
@@ -155,7 +152,7 @@ The strings are not equal.
 ```
 
 
-#### Checks if a value exists in an array
+### Checks if a value exists in an array
 
 ```
 [[ddIf?
@@ -174,7 +171,7 @@ Exists.
 ```
 
 
-#### Check if `operand1` contains `operand2`
+### Check if `operand1` contains `operand2`
 
 ```
 [[ddIf?
@@ -193,7 +190,7 @@ Returns:
 ```
 
 
-#### Checks if a `operand1` value is number or not
+### Checks if a `operand1` value is number or not
 
 ```
 [[ddIf?
@@ -211,7 +208,7 @@ Number.
 ```
 
 
-#### Checks if a `operand1` value is just white space or not
+### Checks if a `operand1` value is just white space or not
 
 Any number of spaces / tabs / new lines / etc are considered as white space.
 An empty string is also considered as white space.
@@ -253,7 +250,7 @@ All you need is love.
 ```
 
 
-#### Number comparison and pass additional data to chunks
+### Number comparison and pass additional data to chunks
 
 ```
 [[ddIf?
@@ -299,7 +296,7 @@ Let `[*general_price*]` be equal to `120`, then the snippet returns:
 ```
 
 
-#### Run the snippet through `\DDTools\Snippet::runSnippet` without DB and eval
+### Run the snippet through `\DDTools\Snippet::runSnippet` without DB and eval
 
 ```php
 //Include (MODX)EvolutionCMS.libraries.ddTools
