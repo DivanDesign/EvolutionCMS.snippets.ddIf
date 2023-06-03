@@ -76,7 +76,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.1.1 (2023-05-14)
+	 * @version 1.2 (2023-06-03)
 	 * 
 	 * @return {string}
 	 */
@@ -137,6 +137,13 @@ class Snippet extends \DDTools\Snippet {
 						true :
 						false
 					;
+				break;
+				
+				case 'isincludes':
+					$boolOut = str_contains(
+						$this->params->operand1,
+						$this->params->operand2
+					);
 				break;
 				
 				case 'inarray':

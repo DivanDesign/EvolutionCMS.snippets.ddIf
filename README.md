@@ -83,6 +83,7 @@ require_once(
 		* `'inArray'`
 		* `'isNumeric'`
 		* `'isWhitespace'` — checks if `operand1` is just white space (an empty string is also considered as white space)
+		* `'isIncludes'` — case-sensitive check if `operand1` contains `operand2`
 	* Default value: `'=='`
 	
 * `trueChunk`
@@ -170,6 +171,25 @@ Returns:
 
 ```
 Exists.
+```
+
+
+#### Check if `operand1` contains `operand2`
+
+```
+[[ddIf?
+	&operand1=`The quick brown fox jumps over the lazy dog.`
+	&operator=`isIncludes`
+	&operand2=`fox`
+	&trueChunk=`@CODE:“fox” is found`
+	&falseChunk=`@CODE:“fox” is not found`
+]]
+```
+
+Returns:
+
+```
+“fox” is found
 ```
 
 
