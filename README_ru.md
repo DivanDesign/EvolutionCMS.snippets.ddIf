@@ -86,9 +86,9 @@ require_once(
 * `trueChunk`
 	* Описание: Значение, возвращаемое при истинном условии.
 		Доступные плейсхолдеры:
-		* `[+snippetParams.operand1+]` — содержит значение `operand1`.
-		* `[+snippetParams.operand2+]` — содержит значение `operand2`.
-		* `[+snippetParams.operator+]` — содержит значение `operator`.
+		* `[+ddIfParams.operand1+]` — содержит значение `operand1`.
+		* `[+ddIfParams.operand2+]` — содержит значение `operand2`.
+		* `[+ddIfParams.operator+]` — содержит значение `operator`.
 		* `[+`любой плейсхолдер из параметра `placeholders` `+]`
 	* Допустимые значения:
 		* `stringChunkName`
@@ -98,9 +98,9 @@ require_once(
 * `falseChunk`
 	* Описание: Значение, возвращаемое при ложном условии. 
 		Доступные плейсхолдеры:
-		* `[+snippetParams.operand1+]` — содержит значение `operand1`.
-		* `[+snippetParams.operand2+]` — содержит значение `operand2`.
-		* `[+snippetParams.operator+]` — содержит значение `operator`.
+		* `[+ddIfParams.operand1+]` — содержит значение `operand1`.
+		* `[+ddIfParams.operand2+]` — содержит значение `operand2`.
+		* `[+ddIfParams.operator+]` — содержит значение `operator`.
 		* `[+`любой плейсхолдер из параметра `placeholders` `+]`
 	* Допустимые значения:
 		* `stringChunkName`
@@ -222,7 +222,7 @@ require_once(
 	`
 	&operator=`isWhitespace`
 	&trueChunk=`@CODE:Строка содержит только пробельные символы.`
-	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+	&falseChunk=`@CODE:[+ddIfParams.operand1+]`
 ]]
 ```
 
@@ -239,7 +239,7 @@ require_once(
 	&operand1=`All you need is love.`
 	&operator=`isWhitespace`
 	&trueChunk=`@CODE:Строка содержит только пробельные символы.`
-	&falseChunk=`@CODE:[+snippetParams.operand1+]`
+	&falseChunk=`@CODE:[+ddIfParams.operand1+]`
 ]]
 ```
 
@@ -271,7 +271,7 @@ All you need is love.
 
 ```html
 <div>
-	<h2>[+title+], $[+snippetParams.operand1+]</h2>
+	<h2>[+title+], $[+ddIfParams.operand1+]</h2>
 	<img src="[+image+]" alt="[+title+]" />
 </div>
 ```
@@ -280,7 +280,7 @@ All you need is love.
 
 ```html
 <div class="inexpensive">
-	<h2>[+title+], <strong>$[+snippetParams.operand1+]</strong></h2>
+	<h2>[+title+], <strong>$[+ddIfParams.operand1+]</strong></h2>
 	<img src="[+image+]" alt="[+title+]" />
 	<p>[+somethingText+]</p>
 </div>

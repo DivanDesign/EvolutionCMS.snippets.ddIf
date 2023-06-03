@@ -76,7 +76,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.2.2 (2023-06-03)
+	 * @version 1.2.3 (2023-06-03)
 	 * 
 	 * @return {string}
 	 */
@@ -176,9 +176,13 @@ class Snippet extends \DDTools\Snippet {
 				'data' => \DDTools\ObjectTools::extend([
 					'objects' => [
 						[
+							'ddIfParams.operand1' => $this->params->operand1,
+							'ddIfParams.operand2' => $this->params->operand2,
+							'ddIfParams.operator' => $this->params->operator,
+							//Backward compatibility
 							'snippetParams.operand1' => $this->params->operand1,
 							'snippetParams.operand2' => $this->params->operand2,
-							'snippetParams.operator' => $this->params->operator
+							'snippetParams.operator' => $this->params->operator,
 						],
 						$this->params->placeholders
 					]
