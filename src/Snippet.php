@@ -76,7 +76,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.2.1 (2023-06-03)
+	 * @version 1.2.2 (2023-06-03)
 	 * 
 	 * @return {string}
 	 */
@@ -92,51 +92,27 @@ class Snippet extends \DDTools\Snippet {
 			//Выбираем сравнение в зависимости от оператора
 			switch ($this->params->operator){
 				case '!=':
-					$boolOut =
-						$this->params->operand1 != $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 != $this->params->operand2;
 				break;
 				
 				case '>':
-					$boolOut =
-						$this->params->operand1 > $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 > $this->params->operand2;
 				break;
 				
 				case '<':
-					$boolOut =
-						$this->params->operand1 < $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 < $this->params->operand2;
 				break;
 				
 				case '>=':
-					$boolOut =
-						$this->params->operand1 >= $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 >= $this->params->operand2;
 				break;
 				
 				case '<=':
-					$boolOut =
-						$this->params->operand1 <= $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 <= $this->params->operand2;
 				break;
 				
 				case 'bool':
-					$boolOut =
-						$this->params->operand1 ?
-						true :
-						false
-					;
+					$boolOut = boolval($this->params->operand1);
 				break;
 				
 				case 'isincludes':
@@ -164,14 +140,10 @@ class Snippet extends \DDTools\Snippet {
 						$this->params->operand2
 					);
 					
-					$boolOut =
-						in_array(
-							$this->params->operand1,
-							$operand2Array
-						) ?
-						true :
-						false
-					;
+					$boolOut = in_array(
+						$this->params->operand1,
+						$operand2Array
+					);
 				break;
 				
 				case 'isnumeric':
@@ -187,11 +159,7 @@ class Snippet extends \DDTools\Snippet {
 				
 				case '==':
 				default:
-					$boolOut =
-						$this->params->operand1 == $this->params->operand2 ?
-						true :
-						false
-					;
+					$boolOut = $this->params->operand1 == $this->params->operand2;
 			}
 			
 			//Select output chunk
