@@ -1,6 +1,12 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Версия 2.3 (2023-06-03)
+* \+ Параметры → `operator` → Допустимые значения → `'isIncludes'`: Новое значение. Проверяет, содержит ли `operand1` в себе `operand2` с учётом регистра, (см. README → Примеры).
+* \* `\ddTools::getTpl` используется вместо `$modx->getTpl` (стало чуть меньше багов).
+* \* Внимание! Требуется (MODX)EvolutionCMS.libraries.ddTools >= 0.60.
+
+
 ## Версия 2.2 (2021-04-30)
 * \+ Параметры → `operator`:
 	* \+ Добавлена возможность проверить, что строка `operand1` содержит только пробельные символы (см. README).
@@ -93,5 +99,5 @@
 	* \* `falseChunk`: Переименован из `falseChank`.
 
 
-<link rel="stylesheet" type="text/css" href="https://DivanDesign.ru/assets/files/ddMarkdown.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.githack.com/DivanDesign/CSS.ddMarkdown/master/style.min.css" />
 <style>ul{list-style:none;}</style>

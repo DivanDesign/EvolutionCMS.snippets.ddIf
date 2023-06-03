@@ -3,7 +3,7 @@ namespace ddIf;
 
 class Snippet extends \DDTools\Snippet {
 	protected
-		$version = '2.2.0',
+		$version = '2.3.0',
 		
 		$params = [
 			//Defaults
@@ -76,7 +76,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.1 (2021-04-30)
+	 * @version 1.2 (2023-06-03)
 	 * 
 	 * @return {string}
 	 */
@@ -139,6 +139,13 @@ class Snippet extends \DDTools\Snippet {
 					;
 				break;
 				
+				case 'isincludes':
+					$boolOut = str_contains(
+						$this->params->operand1,
+						$this->params->operand2
+					);
+				break;
+				
 				case 'inarray':
 					$operand2Array = explode(
 						',',
@@ -182,12 +189,7 @@ class Snippet extends \DDTools\Snippet {
 				$this->params->falseChunk
 			;
 			
-			//$modx->getTpl('@CODE:') returns '@CODE:' O_o
-			$resultChunk =
-				$resultChunk == '@CODE:' ?
-				'' :
-				\ddTools::$modx->getTpl($resultChunk)
-			;
+			$resultChunk = \ddTools::getTpl($resultChunk);
 			
 			$result = \ddTools::parseText([
 				'text' => $resultChunk,

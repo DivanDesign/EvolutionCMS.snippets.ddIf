@@ -7,34 +7,13 @@
 
 * PHP >= 5.6
 * [(MODX)EvolutionCMS](https://github.com/evolution-cms/evolution) >= 1.1
-* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.49.1
+* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.ru/modx/ddtools) >= 0.60
 
 
-## Документация
+## Установка
 
 
-### Установка
-
-
-#### Вручную
-
-
-##### 1. Элементы → Сниппеты: Создайте новый сниппет со следующими параметрами
-
-1. Название сниппета: `ddIf`.
-2. Описание: `<b>2.2</b> Сравнивает значения и выводит необходимый чанк или строку.`.
-3. Категория: `Core`.
-4. Анализировать DocBlock: `no`.
-5. Код сниппета (php): Вставьте содержимое файла `ddIf_snippet.php` из архива.
-
-
-##### 2. Элементы → Управление файлами
-
-1. Создайте новую папку `assets/snippets/ddIf/`.
-2. Извлеките содержимое архива в неё (кроме файла `ddIf_snippet.php`).
-
-
-#### Используя [(MODX)EvolutionCMS.libraries.ddInstaller](https://github.com/DivanDesign/EvolutionCMS.libraries.ddInstaller)
+### Используя [(MODX)EvolutionCMS.libraries.ddInstaller](https://github.com/DivanDesign/EvolutionCMS.libraries.ddInstaller)
 
 Просто вызовите следующий код в своих исходинках или модуле [Console](https://github.com/vanchelo/MODX-Evolution-Ajax-Console):
 
@@ -56,7 +35,25 @@ require_once(
 * Если `ddIf` уже есть на вашем сайте, `ddInstaller` проверит его версию и обновит, если нужно. 
 
 
-### Описание параметров
+### Вручную
+
+
+#### 1. Элементы → Сниппеты: Создайте новый сниппет со следующими параметрами
+
+1. Название сниппета: `ddIf`.
+2. Описание: `<b>2.3</b> Сравнивает значения и выводит необходимый чанк или строку.`.
+3. Категория: `Core`.
+4. Анализировать DocBlock: `no`.
+5. Код сниппета (php): Вставьте содержимое файла `ddIf_snippet.php` из архива.
+
+
+#### 2. Элементы → Управление файлами
+
+1. Создайте новую папку `assets/snippets/ddIf/`.
+2. Извлеките содержимое архива в неё (кроме файла `ddIf_snippet.php`).
+
+
+## Описание параметров
 
 * `operand1`
 	* Описание: Первое значение для сравнения.  
@@ -83,6 +80,7 @@ require_once(
 		* `'inArray'`
 		* `'isNumeric'`
 		* `'isWhitespace'` — проверяет, что строка `operand1` содержит только пробельные символы (пустая строка также считается пробельным символом)
+		* `'isIncludes'` — проверяет, содержит ли `operand1` в себе `operand2` (с учётом регистра)
 	* Значение по умолчанию: `'=='`
 	
 * `trueChunk`
@@ -119,7 +117,7 @@ require_once(
 	* Допустимые значения:
 		* `stringJsonObject` — в виде [JSON](https://ru.wikipedia.org/wiki/JSON)
 		* `stringHjsonObject` — в виде [HJSON](https://hjson.github.io/)
-		* `stringQueryFormated` — в виде [Query string](https://en.wikipedia.org/wiki/Query_string)
+		* `stringQueryFormatted` — в виде [Query string](https://en.wikipedia.org/wiki/Query_string)
 		* Также может быть задан, как нативный PHP объект или массив (например, для вызовов через `$modx->runSnippet`).
 			* `arrayAssociative`
 			* `object`
@@ -132,10 +130,10 @@ require_once(
 	* Значение по умолчанию: —
 
 
-### Примеры
+## Примеры
 
 
-#### Сравнение двух строк
+### Сравнение двух строк
 
 ```
 [[ddIf?
@@ -154,7 +152,7 @@ require_once(
 ```
 
 
-#### Присутствует ли значение в массиве
+### Присутствует ли значение в массиве
 
 ```
 [[ddIf?
@@ -173,7 +171,26 @@ require_once(
 ```
 
 
-#### Является ли `operand1` числом
+### Содержит ли `operand1` в себе `operand2`
+
+```
+[[ddIf?
+	&operand1=`Быстрая коричневая лиса перепрыгнула через ленивую собаку.`
+	&operator=`isIncludes`
+	&operand2=`лиса`
+	&trueChunk=`@CODE:«лиса» найдена`
+	&falseChunk=`@CODE:«лиса» не найдена`
+]]
+```
+
+Вернёт:
+
+```
+«лиса» найдена
+```
+
+
+### Является ли `operand1` числом
 
 ```
 [[ddIf?
@@ -191,7 +208,7 @@ require_once(
 ```
 
 
-#### Содержит ли `operand1` что-то, кроме пробельных символов
+### Содержит ли `operand1` что-то, кроме пробельных символов
 
 Любое количество пробелов / табуляторов / новых строк / etc трактуются пробельными.
 Пустая строка также считается пробельным символом.
@@ -233,7 +250,7 @@ All you need is love.
 ```
 
 
-#### Сравнение двух чисел и передача дополнительных данных в чанки
+### Сравнение двух чисел и передача дополнительных данных в чанки
 
 ```
 [[ddIf?
@@ -279,7 +296,7 @@ All you need is love.
 ```
 
 
-#### Запустить сниппет через `\DDTools\Snippet::runSnippet` без DB и eval
+### Запустить сниппет через `\DDTools\Snippet::runSnippet` без DB и eval
 
 ```php
 //Подключение (MODX)EvolutionCMS.libraries.ddTools
@@ -305,6 +322,7 @@ require_once(
 * [Home page](https://code.divandesign.ru/modx/ddif)
 * [Telegram chat](https://t.me/dd_code)
 * [Packagist](https://packagist.org/packages/dd/evolutioncms-snippets-ddif)
+* [GitHub](https://github.com/DivanDesign/EvolutionCMS.snippets.ddIf)
 
 
-<link rel="stylesheet" type="text/css" href="https://DivanDesign.ru/assets/files/ddMarkdown.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.githack.com/DivanDesign/CSS.ddMarkdown/master/style.min.css" />

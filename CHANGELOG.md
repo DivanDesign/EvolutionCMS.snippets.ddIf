@@ -1,6 +1,12 @@
 # (MODX)EvolutionCMS.snippets.ddIf changelog
 
 
+## Version 2.3 (2023-06-03)
+* \+ Parameters → `operator` → Valid values → `'isIncludes'`: The new valid value. Case-sensitive check if `operand1` contains `operand2` (see README → Examples).
+* \* `\ddTools::getTpl` is used instead of `$modx->getTpl` (means a bit less bugs).
+* \* Attention! (MODX)EvolutionCMS.libraries.ddTools >= 0.60 is required.
+
+
 ## Version 2.2 (2021-04-30)
 * \+ Parameters → `operator`:
 	* \+ Added the ability to check if `operand1` is just white space (see README).
@@ -93,5 +99,5 @@
 	* \* `falseChunk`: Has been renamed from `falseChank`.
 
 
-<link rel="stylesheet" type="text/css" href="https://DivanDesign.ru/assets/files/ddMarkdown.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.githack.com/DivanDesign/CSS.ddMarkdown/master/style.min.css" />
 <style>ul{list-style:none;}</style>
