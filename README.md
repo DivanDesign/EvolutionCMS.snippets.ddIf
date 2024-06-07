@@ -56,18 +56,18 @@ require_once(
 ## Parameters description
 
 * `operand1`
-	* Desctription: The first operand for comparing.  
+	* Description: The first operand for comparing.  
 		An empty unparsed placeholder (like `'[+somePlaceholder+]'`) will be interpretated as empty string (`''`).
 	* Valid values: `string`
 	* **Required**
 	
 * `operand2`
-	* Desctription: The second operand for comparing.
+	* Description: The second operand for comparing.
 	* Valid values: `string`
 	* Default value: `''`
 	
 * `operator`
-	* Desctription: Comparing operator.  
+	* Description: Comparing operator.  
 		Values are case insensitive (the following names are equal: `'isNumeric'`, `'isnumeric'`, `'ISNUMERIC'`, etc).
 	* Valid values:
 		* `'=='`
@@ -84,7 +84,7 @@ require_once(
 	* Default value: `'=='`
 	
 * `trueChunk`
-	* Desctription: This value is returning if result is true.
+	* Description: This value is returning if result is true.
 		Available placeholders:
 		* `[+ddIfParams.operand1+]` — contains `operand1` value.
 		* `[+ddIfParams.operand2+]` — contains `operand2` value.
@@ -96,7 +96,7 @@ require_once(
 	* Default value: `''`
 	
 * `falseChunk`
-	* Desctription: This value is returning if result is false. 
+	* Description: This value is returning if result is false. 
 		Available placeholders:
 		* `[+ddIfParams.operand1+]` — contains `operand1` value.
 		* `[+ddIfParams.operand2+]` — contains `operand2` value.
@@ -108,7 +108,7 @@ require_once(
 	* Default value: `''`
 	
 * `placeholders`
-	* Desctription:
+	* Description:
 		Additional data has to be passed into the `trueChunk` and `falseChunk`.  
 		Nested objects and arrays are supported too:
 		* `{"someOne": "1", "someTwo": "test" }` => `[+someOne+], [+someTwo+]`.
@@ -124,7 +124,7 @@ require_once(
 	* Default value: —
 	
 * `debugTitle`
-	* Desctription: The title for the System Event log if debugging is needed.  
+	* Description: The title for the System Event log if debugging is needed.  
 		Just set it and watch the System Event log.
 	* Valid values: `string`
 	* Default value: —
