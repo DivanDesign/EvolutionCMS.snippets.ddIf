@@ -6,16 +6,16 @@ class Snippet extends \DDTools\Snippet {
 		$version = '2.3.1',
 		
 		$params = [
-			//Defaults
-			//Required
+			// Defaults
+			// Required
 			'operand1' => null,
-			//Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
+			// Если передали, с чем сравнивать, хорошо, если нет — будем с пустой строкой
 			'operand2' => '',
 			'operator' => '==',
 			'trueChunk' => '',
 			'falseChunk' => '',
 			'placeholders' => [],
-			//Unset
+			// Unset
 			'debugTitle' => null
 		],
 		
@@ -26,17 +26,17 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * prepareParams
-	 * @version 1.2 (2021-04-30)
+	 * @version 1.2.1 (2024-08-06)
 	 * 
 	 * @param $params {stdClass|arrayAssociative|stringJsonObject|stringQueryFormatted}
 	 * 
 	 * @return {void}
 	 */
 	protected function prepareParams($params = []){
-		//Call base method
+		// Call base method
 		parent::prepareParams($params);
 		
-		//Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
+		// Если это сырой плейсхолдер, то скорее всего он пустой, и его не обработал парсер, приравняем тогда параметр к пустоте
 		if (
 			is_string($this->params->operand1) &&
 			mb_substr(
@@ -54,7 +54,7 @@ class Snippet extends \DDTools\Snippet {
 		
 		$this->params->operator = mb_strtolower($this->params->operator);
 		
-		//Backward compatibility
+		// Backward compatibility
 		$operatorBackwardCompliance = [
 			'r' => '==',
 			'!r' => '!=',
@@ -76,20 +76,20 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.2.3 (2023-06-03)
+	 * @version 1.2.4 (2024-08-06)
 	 * 
 	 * @return {string}
 	 */
 	public function run(){
-		//The snippet must return an empty string even if result is absent
+		// The snippet must return an empty string even if result is absent
 		$result = '';
 		
-		//Если передано, что сравнивать
+		// Если передано, что сравнивать
 		if (!is_null($this->params->operand1)){
-			//Булевое значение истинности сравнения
+			// Булевое значение истинности сравнения
 			$boolOut = '';
 			
-			//Выбираем сравнение в зависимости от оператора
+			// Выбираем сравнение в зависимости от оператора
 			switch ($this->params->operator){
 				case '!=':
 					$boolOut = $this->params->operand1 != $this->params->operand2;
@@ -118,12 +118,12 @@ class Snippet extends \DDTools\Snippet {
 				case 'isincludes':
 					$boolOut =
 						function_exists('str_contains') ?
-						//PHP >= 8
+						// PHP >= 8
 						str_contains(
 							$this->params->operand1,
 							$this->params->operand2
 						) :
-						//PHP < 8
+						// PHP < 8
 						(
 							$this->params->operand2 === '' ||
 							mb_strpos(
@@ -162,7 +162,7 @@ class Snippet extends \DDTools\Snippet {
 					$boolOut = $this->params->operand1 == $this->params->operand2;
 			}
 			
-			//Select output chunk
+			// Select output chunk
 			$resultChunk =
 				$boolOut ?
 				$this->params->trueChunk :
@@ -179,7 +179,7 @@ class Snippet extends \DDTools\Snippet {
 							'ddIfParams.operand1' => $this->params->operand1,
 							'ddIfParams.operand2' => $this->params->operand2,
 							'ddIfParams.operator' => $this->params->operator,
-							//Backward compatibility
+							// Backward compatibility
 							'snippetParams.operand1' => $this->params->operand1,
 							'snippetParams.operand2' => $this->params->operand2,
 							'snippetParams.operator' => $this->params->operator,
@@ -190,7 +190,7 @@ class Snippet extends \DDTools\Snippet {
 			]);
 		}
 		
-		//Если для отладки нужно вывести то что пришло в сниппет выводим
+		// Если для отладки нужно вывести то что пришло в сниппет выводим
 		if(!is_null($this->params->debugTitle)){
 			\ddTools::logEvent([
 				'message' =>
